@@ -1,0 +1,11 @@
+*.pyc
+*egg*
+.DS_Store
+__pycache__/
+build/
+dist
+index.html
+pip-wheel-metadata/
+*.pdf
+*.css
+*.pyz
