@@ -54,6 +54,9 @@ def thumbnail(image, name, args):
         print('Thumbnailer:', e)
         return "<figure><a href='{}'><img src='{}'></a><figcaption>{}</figcaption></figure>".format(name, name, name)
 
+def folder(name, id):
+    html = '<div>'+name+'</div><iframe src="{}/index.html" id="'+id+'" onLoad="autoResize(\''+id+'\')";></iframe>'
+    return html.format(name)
 
 def div(args, type_, subtype, tag, name):
     id_name = name.split('.')[0].replace(' ', '_')
@@ -191,13 +194,15 @@ def distribusify(args, directory):  # noqa
                 else:
                     html.append('<a href="../">../</a>')
 
+            i = 0;
             for name in dirs:
                 if args.menu_with_index:
                     a = "<a href='{}/index.html'>{}</a>".replace('{}', name)
                 else:
                     a = "<a href='{}'>{}/</a>".replace('{}', name)
 
-                html.insert(0, div(args, 'dir', 'dir', a, 'folder'))
+                html.insert(0, folder(name, 'folder-{}'.format(i)))
+                i = i + 1
 
             index = os.path.join(root, 'index.html')
             if os.path.exists(index):

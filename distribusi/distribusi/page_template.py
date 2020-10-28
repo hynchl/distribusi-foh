@@ -15,6 +15,28 @@ html_head = """
       video {width:640px;max-height:640px;}
       %s
     </style>
+    <script language="JavaScript">
+<!--
+function autoResize(id){
+    
+    
+    var newheight;
+    var newwidth;
+
+    if(document.getElementById){
+        newheight=document.getElementById(id).contentWindow.document.body.scrollHeight;
+        newwidth=document.getElementById(id).contentWindow.document.body.scrollWidth;
+    }
+
+    document.getElementById(id).height= (newheight) + "px";
+    document.getElementById(id).width= (newwidth) + "px";
+    
+    console.log("Call autoResize for "+id+" w: " + newwidth + ", h: " + newheight);
+    
+    
+}
+//-->
+</script>
   </head>
   <body>
 """
