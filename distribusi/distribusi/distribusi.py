@@ -1,6 +1,7 @@
 import base64
 import os
 import subprocess
+
 from io import BytesIO
 
 import magic
@@ -8,6 +9,9 @@ from PIL import Image
 
 from distribusi.page_template import html_footer, html_head
 from distribusi.mappings import CODE_TYPES, FILE_TYPES, SUB_TYPES
+
+from distribusi import fregments
+
 
 MIME_TYPE = magic.Magic(mime=True)
 
@@ -109,6 +113,9 @@ def write_index(args,index, html, html_head, html_footer):
 
 
 def distribusify(args, directory):  # noqa
+
+    freg = fregments.Fregments()
+
     for root, dirs, files in os.walk(directory):
 
         if args.exclude_directory:
@@ -122,6 +129,14 @@ def distribusify(args, directory):  # noqa
 
         dirs.sort()
         files.sort()
+
+        #
+        # fregments index
+        # 작가 폴더 내인 경우 아티스트명 저장
+        #
+        path = root.split('/')
+        if len(path) == 3:
+            artist = path[2].strip()
 
         if not args.remove_index:
             html = []
@@ -185,6 +200,15 @@ def distribusify(args, directory):  # noqa
 
                     html.append(div(args, type_, subtype, a, name))
 
+                    #
+                    # fregments index
+                    # 작가 폴더 내부의 파일인 경우 조각 추가
+                    #
+                    if len(path) == 3 and artist:
+                        id_name = name.split('.')[0].replace(' ', '_')
+                        freg.add(artist, id_name)
+
+
             if root != directory:
                 if args.menu_with_index:
                     html.append('<a href="../index.html">../</a>')
@@ -192,12 +216,21 @@ def distribusify(args, directory):  # noqa
                     html.append('<a href="../">../</a>')
 
             for name in dirs:
+                '''
                 if args.menu_with_index:
                     a = "<a href='{}/index.html'>{}</a>".replace('{}', name)
                 else:
                     a = "<a href='{}'>{}/</a>".replace('{}', name)
 
                 html.insert(0, div(args, 'dir', 'dir', a, 'folder'))
+                '''
+                #
+                # fregments index
+                # 작가 폴더 내부의 폴더인 경우 조각 추가
+                #
+                if len(path) == 3 and artist:
+                    id_name = name.split('.')[0].replace(' ', '_')
+                    freg.add(artist, id_name)
 
             index = os.path.join(root, 'index.html')
             if os.path.exists(index):
@@ -216,3 +249,22 @@ def distribusify(args, directory):  # noqa
                         os.remove(index)
                 except Exception as e:
                     print(e)
+
+    #
+    # fregments index
+    # 임시 데이터 저장
+    #
+    print("-----------------------")
+    html = []
+    freg.save()
+    json_data = freg.get_fregments()
+    count = freg.get_count()
+    for f in json_data:
+        file = f['file']
+        url = "/{}/#{} ".format(file['artist'], file['fregment'])
+        label = "{} 번째 조각".format(count)
+        html.append('<a href="{}">{}</a><br/>'.format(url, label))
+        count = count - 1
+
+    index = os.path.join(directory, 'index.html')
+    write_index(args, index, html, html_head, html_footer)
