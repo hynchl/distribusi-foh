@@ -5,6 +5,7 @@ from io import BytesIO
 
 import magic
 from PIL import Image
+import markdown
 
 from distribusi.page_template import html_footer, html_head
 from distribusi.mappings import CODE_TYPES, FILE_TYPES, SUB_TYPES
@@ -156,6 +157,9 @@ def distribusify(args, directory):  # noqa
                                 # if the plain text is code,
                                 # which types do we wrap in pre-tags?
                                 a = "<pre>" + open(full_path).read() + "</pre>"
+                            elif subtype == 'markdown' or name.endswith('.md'):
+                                a = "<pre>" + markdown.markdown(open(full_path).read()) + "</pre>"
+                                pass
                             else:
                                 subtype = subtype+' unkown-file'
                                 a = "<a href='{}'>{}</a>"

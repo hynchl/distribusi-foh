@@ -1,3 +1,4 @@
 pillow
 python-magic
 python-magic-bin
+markdown
