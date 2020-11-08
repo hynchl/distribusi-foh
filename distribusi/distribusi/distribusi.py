@@ -100,6 +100,7 @@ def write_index(args,index, html, html_head, html_footer):
                 styled_html_head = html_head % style
             else:
                 styled_html_head = html_head % ''
+                print("---")
             f.write(styled_html_head)
 
         for line in html:
