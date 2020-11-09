@@ -115,6 +115,7 @@ def write_index(args,index, html, html_head, html_footer):
 def distribusify(args, directory):  # noqa
 
     freg = fregments.Fregments()
+    freg.preindex(directory)
 
     for root, dirs, files in os.walk(directory):
 
@@ -204,9 +205,9 @@ def distribusify(args, directory):  # noqa
                     # fregments index
                     # 작가 폴더 내부의 파일인 경우 조각 추가
                     #
-                    if len(path) == 3 and artist:
-                        id_name = name.split('.')[0].replace(' ', '_')
-                        freg.add(artist, id_name)
+                    #if len(path) == 3 and artist:
+                    #    id_name = name.split('.')[0].replace(' ', '_')
+                    #    freg.add(artist, id_name)
 
 
             if root != directory:
