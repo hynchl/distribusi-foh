@@ -1,0 +1,291 @@
+
+      /***** temp color *****/
+      body                            {background-color: gray;}
+      #menu                           {background-color: yellow;}
+      #menu>span                      {background-color: green;}
+      div#logo_wrapper                {background-color:cyan;}
+      div#about_icon_wrapper          {background-color:orange;}
+      div#timeline_icon_wrapper       {background-color: teal;}
+      div#margin                      {background-color:brown;}
+      div#fragments_wrapper           {background-color:skyblue;}
+      div#about_wrapper               {background-color:skyblue;}
+      p.col                           {background-color:navajowhite;}
+      div#wrapper_sns                 {background-color:palevioletred;}
+      div#wrapper_author              {background-color: palegreen;}
+      div#fragment_wrapper            {background-color: burlywood;}
+      div#introduction                {background-color: violet;}
+      div#archive                     {background-color: grey;}      
+      div#frags                       {background-color:skyblue;}
+      div.frag                        {background:beige;}
+
+      /***** common *****/
+      * { margin: 0; font-family: Arial, Helvetica, sans-serif; word-break: keep-all;}
+      a, a:hover, a:visited {color:black;}
+      
+      /***** mobile *****/
+
+        /* MENU */
+        #menu {
+          width:100%;
+          height:50px;
+          padding-top:120px;
+          position:fixed;
+          z-index:10;
+          text-align:center;
+        }
+
+        div#menu>span{ 
+          font-size: 18px;
+          top:20px;
+          position:relative; 
+          margin:5px;
+        }
+
+        div#logo_wrapper {
+          position:absolute;
+          left: calc(50% - 50px);
+          top: 10px;
+        }
+        img#logo_foh { width:100px; }
+        
+        div#about_icon_wrapper {
+          position:fixed;
+          left: 10px;
+          top: 50px;
+        }
+        img#about_icon { width:80px; }
+
+        div#timeline_icon_wrapper {
+          position:fixed;
+          right: 30px;
+          bottom: 30px;
+        }
+        img#timeline_icon { width:100px; }
+
+        div#margin {
+          position:relative;
+          height:180px;
+        }
+
+        div#wrapper_author {
+          position:relative;
+          padding:15px;
+        }
+
+        div#contents {
+          position:relative;
+          height:150px;
+          padding:20px;
+        }
+
+        svg#author_frag {
+          max-height: 400px;
+          /* width:100% */
+        }
+
+        /* ABOUT ==> CODE OF CONDUCT  */
+        a#wrapper_coc{
+          display:block;
+          width:120px;
+          overflow-x: visible;
+          margin-top:30px;
+          margin-bottom:30px;
+          text-decoration: none;
+        }
+        img#icon_coc {
+          width: 80px;
+          margin:10px;
+        }
+
+        /* ABOUT ==> SOCIAL MEDIA  */
+        div#wrapper_sns {
+          bottom:50px;
+          left:100px;
+          margin-top: 50px;
+          padding-bottom: 50px;
+        }
+        img#icon_fb, img#icon_ig { height: 40px; margin-right:20px;}
+
+      /***** pc *****/
+      @media ( min-width: 720px ) {
+        
+        /* MENU */
+        #menu {
+          width:100%;
+          height:100px;
+          position:fixed;
+          z-index:10;
+        }
+
+        #menu>span {
+          position:absolute;
+          font-size: 18px;
+          top:35px;
+        }
+        /* div#menu>span{  } */
+        #menu>span#to_about     {   left:30px;  }
+        #menu>span#to_fragments {   left:120px; }
+        #menu>span#to_timeline  {   right:30px; }
+
+        div#logo_wrapper {
+          position:absolute;
+          left: calc(50% - 70px);
+          top: 10px;
+        }
+        img#logo_foh { width:140px; }
+        
+        div#about_icon_wrapper {
+          position:absolute;
+          left: calc(50% - 200px);
+          top: 50px;
+        }
+        img#about_icon { width:100px; }
+
+        div#timeline_icon_wrapper {
+          position:fixed;
+          right: 30px;
+          bottom: 30px;
+        }
+        img#timeline_icon { width:140px; }
+
+
+        /* COMMON CONTENT AREA  */
+        div#margin {
+          position:relative;
+          height:150px;
+        }
+        div#contents {
+          position:relative;
+          height:150px;
+          padding:50px;
+        }
+
+        /* HOME ==> FRAGMENTS  */
+        div#fragments_wrapper {
+          height:calc(100vh - 250px);
+        }
+
+        /* ABOUT ==> CONTENTS  */
+        div#about_wrapper {
+          margin:50px;
+        }
+
+        p.col {
+          display:inline-block;
+          width:100%;
+          margin-bottom: 50px;
+        }
+        p.col:nth-child(3) {margin-bottom: 100px;}
+
+        /* ABOUT ==> CODE OF CONDUCT  */
+        a#wrapper_coc{
+          display:block;
+          width:120px;
+          overflow-x: visible;
+          margin-top:30px;
+          text-decoration: none;
+        }
+        img#icon_coc {
+          width: 100px;
+          margin:10px;
+        }
+
+        /* ABOUT ==> SOCIAL MEDIA  */
+        div#wrapper_sns {
+          position: fixed;
+          bottom:50px;
+          left:100px;
+        }
+        img#icon_fb, img#icon_ig { height: 50px; margin-right:20px;}
+
+        /* FRAGMENT ==> AUTHOR */
+        div#wrapper_author {
+          width: 300px;
+          position: fixed;
+          z-index: 10;
+          left: 30px;
+          height: calc(100% - 200px);
+        }
+
+        div#fragment_wrapper {
+          margin:10px;
+        }
+
+        div#introduction {
+          margin:10px;
+        }
+
+        /* FRAGMENT ==> AUTHOR ==> ARCHIVE DROP-DOWN */
+        div#archive {
+          margin:10px;
+        }      
+        div#archive:hover #archive_list{display: block;}
+  
+        div#archive_list {
+          display: none;
+          position: absolute;
+          height:335px;
+          width:200px;
+          overflow-y: scroll;
+          border: 1px solid;
+        }
+        
+        div#archive_list a {
+          display: block;
+          background-color: #fff;
+          border-top: 1px solid;
+          padding: 6px 6px;
+        }
+        div#archive_list a:nth-child(1) {border-top: none;}
+        
+        button#archive_button{
+          width:100px;
+          background:#fff;
+          border:1px solid;
+          height: 30px;
+        }
+
+        img#icon_archive_more {width: 16px;}
+
+        /* FRAGMENT ==> CONTENTS */
+        div#frags{
+          position: absolute;
+          /* background-color:skyblue; */
+          left:350px;
+          top:50px;
+          width: calc(100% - 400px);
+          height:2000px;
+        }
+
+        div.frag{
+          /* background:beige; */
+          margin:10px;
+        }
+
+        /* FRAGMENTS !!!TEMP!!! */
+        svg#authors{max-height:860px;}
+
+      }
+
+      @media ( min-width: 1080px ) {
+        /* ABOUT */
+        p.col:nth-child(1) {margin-left: 0px;}
+
+        p.col {
+          display:inline-block;
+          margin-left: 4%;
+          width:30%;
+          vertical-align:top;
+        }
+      }
+
+
+      /*  default */
+      .image{max-width: 100%;}
+      .pdf object{width:640px;height: 640px;}
+      .dir::before{content:"📁 ";font-size:18px;}
+      .filename{display:block;font-family:mono;}
+      .unkown-file::before{content:"📄 ";font-size:18px;}
+      /* div{max-width: 640px;display:inline-block;vertical-align:top;margin:1em;padding:1em;} */
+      video {width:640px;max-height:640px;}
+      
