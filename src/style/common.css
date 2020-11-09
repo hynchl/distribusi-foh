@@ -32,6 +32,7 @@
           position:fixed;
           z-index:10;
           text-align:center;
+          transition: 0.3s;
         }
 
         div#menu>span{ 
@@ -115,23 +116,25 @@
           height:100px;
           position:fixed;
           z-index:10;
+          padding:0px;
         }
 
-        #menu>span {
+        div#menu>span {
           position:absolute;
           font-size: 18px;
           top:35px;
         }
         /* div#menu>span{  } */
-        #menu>span#to_about     {   left:30px;  }
-        #menu>span#to_fragments {   left:120px; }
-        #menu>span#to_timeline  {   right:30px; }
+        div#menu>span#to_about     {   left:30px;  }
+        div#menu>span#to_fragments {   left:120px; }
+        div#menu>span#to_timeline  {   right:30px; }
 
         div#logo_wrapper {
           position:absolute;
           left: calc(50% - 70px);
           top: 10px;
         }
+
         img#logo_foh { width:140px; }
         
         div#about_icon_wrapper {
@@ -190,14 +193,6 @@
           margin:10px;
         }
 
-        /* ABOUT ==> SOCIAL MEDIA  */
-        div#wrapper_sns {
-          position: fixed;
-          bottom:50px;
-          left:100px;
-        }
-        img#icon_fb, img#icon_ig { height: 50px; margin-right:20px;}
-
         /* FRAGMENT ==> AUTHOR */
         div#wrapper_author {
           width: 300px;
@@ -251,9 +246,9 @@
         div#frags{
           position: absolute;
           /* background-color:skyblue; */
-          left:350px;
+          left:400px;
           top:50px;
-          width: calc(100% - 400px);
+          width: calc(100% - 450px);
           height:2000px;
         }
 
@@ -277,6 +272,16 @@
           width:30%;
           vertical-align:top;
         }
+
+        /* ABOUT ==> SOCIAL MEDIA  */
+        div#wrapper_sns {
+          position: fixed;
+          bottom:50px;
+          left:100px;
+        }
+        img#icon_fb, img#icon_ig { height: 50px; margin-right:20px;}
+
+
       }
 
 
