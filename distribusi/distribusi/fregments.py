@@ -1,7 +1,6 @@
 import os
 import platform
 import json
-import time
 from operator import itemgetter
 
 
@@ -22,7 +21,7 @@ class Fregments:
         self.index = {}
         self.indextable = []
         self.timetable = []
-        self.events_dir = './events/'
+
         self.config_file = 'config.json'
         self.index_file = 'fregments_index.json'
 
@@ -30,7 +29,7 @@ class Fregments:
             self.json_data = json.load(json_file)
 
         self.temp_data = {"fregments":[]}
-        self.count = len(self.json_data["fregments"])
+        self.count = len(self.json_data)
 
     def creation_date(self, path_to_file):
         """
@@ -56,7 +55,11 @@ class Fregments:
         if occupation > -1:
             origin_path = os.path.join(directory, file)
             date = self.creation_date(origin_path)
-            artist = directory.split("/")[2]
+            arr = directory.split("/")
+            if arr.__len__() == 2:
+                artist = arr[1]
+            else:
+                artist = arr[2]
             self.index[occupation] = Fregment(occupation, date, directory, artist, file)
 
     def is_meta(self, file):
@@ -77,14 +80,14 @@ class Fregments:
 
     def preindex(self, directory):
         for root, dirs, files in os.walk(directory):
-            if root == directory:
-                pass
-            else:
+            arr = root.split("/")
+            # 2뎁스까지만 인덱스 함.
+            if arr.__len__() < 4:
                 # files index
                 for f in files:
                     if self.is_meta(f):
                         pass
-                    elif f == "index.html":
+                    elif f == "index.html" or f == ".DS_Store":
                         pass
                     elif self.has_meta(root, f):
                         self.occupancy(root, f)
@@ -97,15 +100,15 @@ class Fregments:
                     else:
                         self.add_timetable(root, d)
 
+    def postindex(self):
         self.timetable = sorted(self.timetable, key=lambda fregment: fregment.update)
         print("----------- INDEXING ------------")
         # indexing
         for f in self.timetable:
             f.index = self.get_lastindex()
             self.index[f.index] = f
-
         self.update_indextable()
-        print(self.indextable)
+        self.save()
 
     def update_indextable(self):
         self.indextable = []
@@ -124,9 +127,13 @@ class Fregments:
     def add_timetable(self, directory, file):
         path = os.path.join(directory, file)
         date = self.creation_date(path)
-        artist = directory.split("/")[2]
-        self.timetable.append(Fregment(-1, date, directory, artist, file))
+        arr = directory.split("/")
+        if arr.__len__() > 2:
+            artist = arr[2]
+            self.timetable.append(Fregment(-1, date, directory, artist, file))
 
+    '''
+    # [deprecated] preindex 하기 전 소소
     def add(self, artist, fregment):
         temp = {
             "index" : 0,
@@ -151,28 +158,30 @@ class Fregments:
             temp["index"] = self.count
             temp["update"] = int(time.time())
             self.temp_data['fregments'].append(temp)
+    '''
 
     def save(self):
-        print(json.dumps(self.temp_data))
-        for f in self.temp_data['fregments']:
-            self.json_data['fregments'].append(f)
+        print(json.dumps(self.indextable, cls=CustomEncoder))
         with open(self.index_file, 'w') as outfile:
-            json.dump(self.json_data, outfile, indent=4)
-        self.count = len(self.json_data["fregments"])
+            json.dump(self.indextable, outfile, indent=4, cls=CustomEncoder)
+        self.count = len(self.indextable)
 
     def get_fregments(self):
-        fregments = self.json_data['fregments']
-        # reverse
-        fregments.sort(key = itemgetter('index'), reverse=True)
-        return fregments
+        return self.indextable
 
     def get_count(self):
         return self.count
 
-    def get_index(self):
-        return 0;
+    def get_index(self, artist, name):
+        for f in self.indextable:
+            if f.artist == artist and f.file == name:
+                return ("{}".format(f.index)).zfill(4)
+        return -1;
 
 
+class CustomEncoder(json.JSONEncoder):
+    def default(self, o):
+        return {'__{}__'.format(o.__class__.__name__): o.__dict__}
 
 if __name__ == "__main__":
     freg = Fregments()

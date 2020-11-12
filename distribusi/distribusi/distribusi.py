@@ -9,8 +9,8 @@ from PIL import Image
 
 from distribusi.page_template import html_footer, html_head
 from distribusi.mappings import CODE_TYPES, FILE_TYPES, SUB_TYPES
-
 from distribusi import fregments
+
 
 
 MIME_TYPE = magic.Magic(mime=True)
@@ -59,8 +59,7 @@ def thumbnail(image, name, args):
         return "<figure><a href='{}'><img src='{}'></a><figcaption>{}</figcaption></figure>".format(name, name, name)
 
 
-def div(args, type_, subtype, tag, name):
-    id_name = name.split('.')[0].replace(' ', '_')
+def div(args, type_, subtype, tag, name, id):
     if args.no_filenames:
         filename = ''
     else:
@@ -74,8 +73,7 @@ def div(args, type_, subtype, tag, name):
         html = '<div id="{}" class="{}">{}</div>'
     else:
         html = '<div id="{}" class="{}">{}' + filename + '</div>'
-
-    return html.format(id_name, subtype, tag)
+    return html.format(id, subtype, tag)
 
 
 def check_distribusi_index(args, index):
@@ -112,11 +110,7 @@ def write_index(args,index, html, html_head, html_footer):
             f.write(html_footer)
 
 
-def distribusify(args, directory):  # noqa
-
-    freg = fregments.Fregments()
-    freg.preindex(directory)
-
+def distribusify(args, directory, freg):  # noqa
     for root, dirs, files in os.walk(directory):
 
         if args.exclude_directory:
@@ -146,7 +140,6 @@ def distribusify(args, directory):  # noqa
                 print('Generating directory listing for', root)
 
             for name in sorted(files):
-
                 if 'index.html' not in name:
                     full_path = os.path.join(root, name)
                     mime = MIME_TYPE.from_file(full_path)
@@ -198,16 +191,9 @@ def distribusify(args, directory):  # noqa
                             subtype = subtype + ' unkown-file'
 
                     a = a.replace('{}', name)
-
-                    html.append(div(args, type_, subtype, a, name))
-
-                    #
-                    # fregments index
-                    # 작가 폴더 내부의 파일인 경우 조각 추가
-                    #
-                    #if len(path) == 3 and artist:
-                    #    id_name = name.split('.')[0].replace(' ', '_')
-                    #    freg.add(artist, id_name)
+                    if len(path) == 3 and artist:
+                        id = freg.get_index(artist, name)
+                        html.append(div(args, type_, subtype, a, name, id))
 
 
             if root != directory:
@@ -225,13 +211,7 @@ def distribusify(args, directory):  # noqa
 
                 html.insert(0, div(args, 'dir', 'dir', a, 'folder'))
                 '''
-                #
-                # fregments index
-                # 작가 폴더 내부의 폴더인 경우 조각 추가
-                #
-                if len(path) == 3 and artist:
-                    id_name = name.split('.')[0].replace(' ', '_')
-                    freg.add(artist, id_name)
+
 
             index = os.path.join(root, 'index.html')
             if os.path.exists(index):
@@ -251,21 +231,18 @@ def distribusify(args, directory):  # noqa
                 except Exception as e:
                     print(e)
 
+def build_index(args, directory, freg):
     #
     # fregments index
     # 임시 데이터 저장
     #
-    print("-----------------------")
+    print("--------- Build main index --------------")
     html = []
-    freg.save()
-    json_data = freg.get_fregments()
-    count = freg.get_count()
-    for f in json_data:
-        file = f['file']
-        url = "/{}/#{} ".format(file['artist'], file['fregment'])
-        label = "{} 번째 조각".format(count)
+    freg_data = freg.get_fregments()
+    for f in freg_data:
+        index = "{}".format(f.index)
+        url = "/{}/#{} ".format(f.artist, index.zfill(4))
+        label = "{} 번째 조각".format(f.index)
         html.append('<a href="{}">{}</a><br/>'.format(url, label))
-        count = count - 1
-
     index = os.path.join(directory, 'index.html')
     write_index(args, index, html, html_head, html_footer)
