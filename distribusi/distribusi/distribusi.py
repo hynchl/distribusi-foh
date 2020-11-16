@@ -1,6 +1,7 @@
 import base64
 import os
 import subprocess
+
 from io import BytesIO
 
 import magic
@@ -9,6 +10,9 @@ import markdown
 
 from distribusi.page_template import html_footer, html_head
 from distribusi.mappings import CODE_TYPES, FILE_TYPES, SUB_TYPES
+from distribusi import fregments
+
+
 
 MIME_TYPE = magic.Magic(mime=True)
 
@@ -56,8 +60,7 @@ def thumbnail(image, name, args):
         return "<figure><a href='{}'><img src='{}'></a><figcaption>{}</figcaption></figure>".format(name, name, name)
 
 
-def div(args, type_, subtype, tag, name):
-    id_name = name.split('.')[0].replace(' ', '_')
+def div(args, type_, subtype, tag, name, id):
     if args.no_filenames:
         filename = ''
     else:
@@ -71,8 +74,7 @@ def div(args, type_, subtype, tag, name):
         html = '<div id="{}" class="{}">{}</div>'
     else:
         html = '<div id="{}" class="{}">{}' + filename + '</div>'
-
-    return html.format(id_name, subtype, tag)
+    return html.format(id, subtype, tag)
 
 
 def check_distribusi_index(args, index):
@@ -110,7 +112,7 @@ def write_index(args,index, html, html_head, html_footer):
             f.write(html_footer)
 
 
-def distribusify(args, directory):  # noqa
+def distribusify(args, directory, freg):  # noqa
     for root, dirs, files in os.walk(directory):
 
         if args.exclude_directory:
@@ -125,6 +127,14 @@ def distribusify(args, directory):  # noqa
         dirs.sort()
         files.sort()
 
+        #
+        # fregments index
+        # 작가 폴더 내인 경우 아티스트명 저장
+        #
+        path = root.split('/')
+        if len(path) == 3:
+            artist = path[2].strip()
+
         if not args.remove_index:
             html = []
 
@@ -132,7 +142,6 @@ def distribusify(args, directory):  # noqa
                 print('Generating directory listing for', root)
 
             for name in sorted(files):
-
                 if 'index.html' not in name:
                     full_path = os.path.join(root, name)
                     mime = MIME_TYPE.from_file(full_path)
@@ -187,8 +196,10 @@ def distribusify(args, directory):  # noqa
                             subtype = subtype + ' unkown-file'
 
                     a = a.replace('{}', name)
+                    if len(path) == 3 and artist:
+                        id = freg.get_index(artist, name)
+                        html.append(div(args, type_, subtype, a, name, id))
 
-                    html.append(div(args, type_, subtype, a, name))
 
             if root != directory:
                 if args.menu_with_index:
@@ -197,12 +208,15 @@ def distribusify(args, directory):  # noqa
                     html.append('<a href="../">../</a>')
 
             for name in dirs:
+                '''
                 if args.menu_with_index:
                     a = "<a href='{}/index.html'>{}</a>".replace('{}', name)
                 else:
                     a = "<a href='{}'>{}/</a>".replace('{}', name)
 
                 html.insert(0, div(args, 'dir', 'dir', a, 'folder'))
+                '''
+
 
             index = os.path.join(root, 'index.html')
             if os.path.exists(index):
@@ -221,3 +235,19 @@ def distribusify(args, directory):  # noqa
                         os.remove(index)
                 except Exception as e:
                     print(e)
+
+def build_index(args, directory, freg):
+    #
+    # fregments index
+    # 임시 데이터 저장
+    #
+    print("--------- Build main index --------------")
+    html = []
+    freg_data = freg.get_fregments()
+    for f in freg_data:
+        index = "{}".format(f.index)
+        url = "/{}/#{} ".format(f.artist, index.zfill(4))
+        label = "{} 번째 조각".format(f.index)
+        html.append('<a href="{}">{}</a><br/>'.format(url, label))
+    index = os.path.join(directory, 'index.html')
+    write_index(args, index, html, html_head, html_footer)

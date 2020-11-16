@@ -15,5 +15,5 @@
 #                         distribusi, use at own risk!
 #   --no-hidden           Exclude hidden directories
 #   --menu-with-index     Append index.html to menu items to aid navigation
-conda activate foh
+
 python distribusi/test.py -d ./test_data/
