@@ -283,9 +283,6 @@
           margin:10px;
         }
 
-        /* FRAGMENTS !!!TEMP!!! */
-        svg#authors{max-height:860px;}
-
       }
 
       @media ( min-width: 1080px ) {
