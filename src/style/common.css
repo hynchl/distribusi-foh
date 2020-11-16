@@ -21,6 +21,32 @@
       /***** common *****/
       * { margin: 0; font-family: Arial, Helvetica, sans-serif; word-break: keep-all;}
       a, a:hover, a:visited {color:black;}
+      .label {
+        font-size: 24px;
+        letter-spacing: 2px;
+      }
+
+      a.menu {
+        font-size: 18px;
+        text-decoration: none;
+      }
+
+      a.menu:hover {
+        /* 밑줄 효과 */
+      }
+      
+      .body_text {
+        font-size: 15px;
+        line-height: 22.5px;
+      }
+
+      .list {
+        font-size: 18px;
+        line-height: 26px;
+      }
+
+      a:hover text, a:focus text, a:active text { animation-duration: 1s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
+      @keyframes rainbowLink {0% {fill: #ff2a2a;} 15% {fill: #ff7a2a;} 30% {fill: #ffc52a; }45% {fill: #43ff2a; }60% {fill: #2a89ff; }75% {fill: #202082; }90% {fill: #6b2aff; } 100% {fill: #e82aff; }}
       
       /***** mobile *****/
 

@@ -6,51 +6,65 @@ var Engine = Matter.Engine,
     Common = Matter.Common,
     Svg = Matter.Svg,
     Vertices = Matter.Vertices;
-
-
-
-
 var engine = Engine.create();
- 
 var render = Render.create({
                 element: document.body,
                 engine: engine,
                 options: {
-                    width: 800,
-                    height: 400,
+                    width: window.innerWidth,
+                    height: window.innerHeight,
                     wireframes: false,
                 }
              });
               
-var boxA = Bodies.rectangle(400, 200, 80, 80);
-var ballA = Bodies.circle(380, 100, 40, 10);
-var ballB = Bodies.circle(460, 10, 40, 10);
-var ground = Bodies.rectangle(400, 380, 810, 60, { isStatic: true });
+var ceiling = Bodies.rectangle(window.innerWidth/2, 0, window.innerWidth, 60, { isStatic: true });
+var floor = Bodies.rectangle(window.innerWidth/2, window.innerHeight-30, window.innerWidth, 60, { isStatic: true });
+var leftWall = Bodies.rectangle(0, window.innerHeight/2, 60, window.innerHeight, { isStatic: true });
+var rightWall = Bodies.rectangle(window.innerWidth, window.innerHeight/2, 60, window.innerHeight, { isStatic: true });
 
-
-var sampleSVG = document.querySelector('#sample').getElementsByTagName('path');
+// Get SVG
+var sampleSVG = document.getElementsByClassName("shape");
 var vertexSets = [],
 color = ['#556270'];
 
-
+var frags = [];
 for(let i = 0; i < sampleSVG.length; i++) {
     path = sampleSVG[i];
-    console.log(path)
     var v = Bodies.fromVertices(100+(i*80), 80, Svg.pathToVertices(path, 20), {
       render: {
         fillStyle: color,
         strokeStyle: color
       }
     }, true);
-  console.log(v)
-  vertexSets.push(v);
-  World.add(engine.world, v);
+
+    // v.position.x *= 0.8;
+    // v.position.y *= 0.8;
+    v.mass = 0.001;
+    v.restitution = 0;
+
+    v.name = path.parentNode.id
+    // vertexSets.push(v);
+    frags.push(v);
 };
-document.querySelector("svg").remove();
 
-vertexSets.push(ground)
+// vertexSets.push(ground)
 
-World.add(engine.world, [boxA, ballA, ballB, ground]);
- 
+console.log(engine.world);
+engine.world.gravity = {scale: 0.0001, x: 0, y: -1}
+
+World.add(engine.world, [ceiling, floor, leftWall, rightWall]);
+World.add(engine.world, frags);
+// World.add(engine.world, [boxA, ballA, ballB, ground]);
+
 Engine.run(engine);
 Render.run(render);
+
+setInterval(()=>{
+  for(let i = 0; i < frags.length; i++) {
+    let el = document.getElementById(frags[i].name);
+    let x = frags[i].position.x;
+    let y = frags[i].position.y;
+    el.setAttribute('transform', "translate("+x/20+","+y/20+")");
+  }
+}, 15)
+// document.querySelector("svg").remove();

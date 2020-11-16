@@ -1,3 +1,5 @@
+// Show or Hide on a mobile device
+
 var didScroll; // 스크롤시에 사용자가 스크롤했다는 것을 알림 
 $(window).scroll(function(event){ didScroll = true; }); 
 
