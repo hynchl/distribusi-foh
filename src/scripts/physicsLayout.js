@@ -37,11 +37,10 @@ for(let i = 0; i < sampleSVG.length; i++) {
       }
     }, true);
 
-    // v.position.x *= 0.8;
-    // v.position.y *= 0.8;
-    v.mass = 0.001;
-    v.restitution = 0;
-
+    v.position.x *= 0.8;
+    v.position.y *= 0.8;
+    v.mass = 1;
+    v.restitution = 0.3;
     v.name = path.parentNode.id
     // vertexSets.push(v);
     frags.push(v);
@@ -59,12 +58,29 @@ World.add(engine.world, frags);
 Engine.run(engine);
 Render.run(render);
 
+SCALAR = 1;
+THRESHOLD = 0;
+
+window.addEventListener("resize", ()=>{
+  // TODO : complete resize function
+  console.log(window.innerWidth);
+  console.log(window.innerHeight);
+
+  // var leftWall = Bodies.rectangle(0, window.innerHeight/2, 60, window.innerHeight);
+  var rightWall = Bodies.rectangle(window.innerWidth, window.innerHeight/2, 60, window.innerHeight);
+
+  rightWall.position.x = window.innerWidth;
+})
+
 setInterval(()=>{
   for(let i = 0; i < frags.length; i++) {
+    frags[i].angle = 0; // lock rotation
     let el = document.getElementById(frags[i].name);
-    let x = frags[i].position.x;
-    let y = frags[i].position.y;
-    el.setAttribute('transform', "translate("+x+","+y+")");
+    // if((frags[i].velocity.x > THRESHOLD) && (frags[i].velocity.y > THRESHOLD)){
+      let x = frags[i].bounds.min.x * SCALAR
+      let y = frags[i].bounds.min.y * SCALAR
+      el.setAttribute('transform', "translate("+x+","+y+")");
+    // } 
   }
 }, 15)
 // document.querySelector("svg").remove();
