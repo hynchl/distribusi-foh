@@ -64,7 +64,7 @@ setInterval(()=>{
     let el = document.getElementById(frags[i].name);
     let x = frags[i].position.x;
     let y = frags[i].position.y;
-    el.setAttribute('transform', "translate("+x/20+","+y/20+")");
+    el.setAttribute('transform', "translate("+x+","+y+")");
   }
 }, 15)
 // document.querySelector("svg").remove();
