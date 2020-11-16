@@ -4,7 +4,7 @@ import json
 from operator import itemgetter
 
 
-class Fregment:
+class Fragment:
     def __init__(self, index, update, directory, artist, file):
         self.index = index
         self.update = update
@@ -16,19 +16,19 @@ class Fregment:
         return repr((self.index, self.update, self.directory, self.artist, self.file))
 
 
-class Fregments:
+class Fragments:
     def __init__(self):
         self.index = {}
         self.indextable = []
         self.timetable = []
 
         self.config_file = 'config.json'
-        self.index_file = 'fregments_index.json'
+        self.index_file = 'fragments_index.json'
 
         with open(self.index_file) as json_file:
             self.json_data = json.load(json_file)
 
-        self.temp_data = {"fregments":[]}
+        self.temp_data = {"fragments":[]}
         self.count = len(self.json_data)
 
     def creation_date(self, path_to_file):
@@ -60,7 +60,7 @@ class Fregments:
                 artist = arr[1]
             else:
                 artist = arr[2]
-            self.index[occupation] = Fregment(occupation, date, directory, artist, file)
+            self.index[occupation] = Fragment(occupation, date, directory, artist, file)
 
     def is_meta(self, file):
         fa = file.split(".")
@@ -101,7 +101,7 @@ class Fregments:
                         self.add_timetable(root, d)
 
     def postindex(self):
-        self.timetable = sorted(self.timetable, key=lambda fregment: fregment.update)
+        self.timetable = sorted(self.timetable, key=lambda fragment: fragment.update)
         print("----------- INDEXING ------------")
         # indexing
         for f in self.timetable:
@@ -114,7 +114,7 @@ class Fregments:
         self.indextable = []
         for f in self.index:
             self.indextable.append(self.index[f])
-        self.indextable = sorted(self.indextable, key=lambda fregment: fregment.index)
+        self.indextable = sorted(self.indextable, key=lambda fragment: fragment.index)
 
     def get_lastindex(self):
         last = 0
@@ -130,34 +130,34 @@ class Fregments:
         arr = directory.split("/")
         if arr.__len__() > 2:
             artist = arr[2]
-            self.timetable.append(Fregment(-1, date, directory, artist, file))
+            self.timetable.append(Fragment(-1, date, directory, artist, file))
 
     '''
     # [deprecated] preindex 하기 전 소소
-    def add(self, artist, fregment):
+    def add(self, artist, fragment):
         temp = {
             "index" : 0,
             "update" : 0,
             "file" : {
                 "artist": artist,
-                "fregment": fregment
+                "fragment": fragment
             }
         }
 
         added = False
-        for f in self.json_data['fregments']:
+        for f in self.json_data['fragments']:
             # 기존 조각과 비교
             if f['file'] == temp['file']:
                 added = True
 
         if added:
-            print("Already added - artist:", artist, ", fregment: ", fregment)
+            print("Already added - artist:", artist, ", fragment: ", fragment)
         else:
             self.count = self.count + 1
-            print("Add fregment - artist:", artist, ", fregment: ", fregment)
+            print("Add fragment - artist:", artist, ", fragment: ", fragment)
             temp["index"] = self.count
             temp["update"] = int(time.time())
-            self.temp_data['fregments'].append(temp)
+            self.temp_data['fragments'].append(temp)
     '''
 
     def save(self):
@@ -166,7 +166,7 @@ class Fregments:
             json.dump(self.indextable, outfile, indent=4, cls=CustomEncoder)
         self.count = len(self.indextable)
 
-    def get_fregments(self):
+    def get_fragments(self):
         return self.indextable
 
     def get_count(self):
@@ -184,4 +184,4 @@ class CustomEncoder(json.JSONEncoder):
         return {'__{}__'.format(o.__class__.__name__): o.__dict__}
 
 if __name__ == "__main__":
-    freg = Fregments()
+    freg = Fragments()

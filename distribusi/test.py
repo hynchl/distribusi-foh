@@ -1,7 +1,7 @@
 # Added by Hyunchul
 # 2020. 10. 26
 from distribusi.cli import build_argparser, distribusify
-from distribusi import fregments
+from distribusi import fragments
 from distribusi.distribusi import build_index
 
 parser = build_argparser()
@@ -10,7 +10,7 @@ args = parser.parse_args()
 event_path = './events'
 data_path = './test_data'
 
-freg = fregments.Fregments()
+freg = fragments.Fragments()
 freg.preindex(event_path)
 freg.preindex(data_path)
 freg.postindex()

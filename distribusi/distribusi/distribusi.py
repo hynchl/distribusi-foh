@@ -10,7 +10,7 @@ import markdown
 
 from distribusi.page_template import html_footer, html_head
 from distribusi.mappings import CODE_TYPES, FILE_TYPES, SUB_TYPES
-from distribusi import fregments
+from distribusi import fragments
 
 
 
@@ -128,7 +128,7 @@ def distribusify(args, directory, freg):  # noqa
         files.sort()
 
         #
-        # fregments index
+        # fragments index
         # 작가 폴더 내인 경우 아티스트명 저장
         #
         path = root.split('/')
@@ -238,12 +238,12 @@ def distribusify(args, directory, freg):  # noqa
 
 def build_index(args, directory, freg):
     #
-    # fregments index
+    # fragments index
     # 임시 데이터 저장
     #
     print("--------- Build main index --------------")
     html = []
-    freg_data = freg.get_fregments()
+    freg_data = freg.get_fragments()
     for f in freg_data:
         index = "{}".format(f.index)
         url = "/{}/#{} ".format(f.artist, index.zfill(4))

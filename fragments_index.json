@@ -1,6 +1,6 @@
 [
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 0,
             "update": 1605171358.9636276,
             "directory": "./events",
@@ -9,7 +9,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 1,
             "update": 1605171365.1618817,
             "directory": "./events",
@@ -18,7 +18,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 2,
             "update": 1603870906.290785,
             "directory": "./test_data/carrot",
@@ -27,7 +27,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 3,
             "update": 1604043931.1111157,
             "directory": "./test_data/carrot",
@@ -36,7 +36,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 4,
             "update": 1604043931.1281314,
             "directory": "./test_data/carrot",
@@ -45,7 +45,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 5,
             "update": 1604043931.147918,
             "directory": "./test_data/fig",
@@ -54,7 +54,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 6,
             "update": 1604043931.1488578,
             "directory": "./test_data/fig",
@@ -63,7 +63,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 7,
             "update": 1604043931.238141,
             "directory": "./test_data/grape",
@@ -72,7 +72,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 8,
             "update": 1605171377.7292128,
             "directory": "./events",
@@ -81,7 +81,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 9,
             "update": 1604043931.259867,
             "directory": "./test_data/grape",
@@ -90,7 +90,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 10,
             "update": 1604043931.3548143,
             "directory": "./test_data/grape",
@@ -99,7 +99,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 11,
             "update": 1604043931.4324255,
             "directory": "./test_data/grape",
@@ -108,7 +108,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 12,
             "update": 1604043931.4409137,
             "directory": "./test_data/grape",
@@ -117,7 +117,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 13,
             "update": 1604050831.3844233,
             "directory": "./test_data/fig",
@@ -126,7 +126,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 14,
             "update": 1604053581.7941525,
             "directory": "./test_data/grape",
@@ -135,7 +135,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 15,
             "update": 1604054141.7061436,
             "directory": "./test_data/carrot",
@@ -144,7 +144,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 16,
             "update": 1604911149.3638797,
             "directory": "./test_data/fig",
@@ -153,7 +153,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 17,
             "update": 1604912196.730964,
             "directory": "./test_data/carrot",
@@ -162,7 +162,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 18,
             "update": 1604912200.5855331,
             "directory": "./test_data/carrot",
@@ -171,7 +171,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 19,
             "update": 1604915491.9132912,
             "directory": "./test_data/fig",
@@ -180,7 +180,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 20,
             "update": 1604915593.2194371,
             "directory": "./test_data/fig",
@@ -189,7 +189,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 21,
             "update": 1605170712.9904313,
             "directory": "./events/event_0000",
@@ -198,7 +198,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 22,
             "update": 1605170736.042438,
             "directory": "./events/event_0000",
@@ -207,7 +207,7 @@
         }
     },
     {
-        "__Fregment__": {
+        "__Fragment__": {
             "index": 23,
             "update": 1605170741.7326746,
             "directory": "./events/event_0000",
