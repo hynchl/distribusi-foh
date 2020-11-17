@@ -25,7 +25,7 @@ class Fragments:
         self.ignore = ['.ignore']
 
         self.ignore_file = '.ignore'
-        self.index_file = 'index.json'
+        self.index_file = 'test_data/index.json'
 
         if os.path.isfile(self.index_file):
             with open(self.index_file) as json_file:
