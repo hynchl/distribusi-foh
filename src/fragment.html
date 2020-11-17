@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="./style/common.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="./scripts/mobileScroll.js"></script>
+  
   </head>
   <body>
 <div>
@@ -71,6 +72,8 @@
     <div id="introduction">
       설명이 아직 없음
     </div>
+
+
     <div id="archive">
       <button id="archive_button">ARCHIVE
         <img id="icon_archive_more" src="./img/icon_archive_more.svg" alt="">
@@ -131,5 +134,29 @@
     </div>
   </div>
 </div>
+<script>
+  var requestURL = 'http://localhost:8000/introduction.json';
+  var request = new XMLHttpRequest();
+  request.open('GET', requestURL);
+  request.responseType = 'json';
+  request.send();
+
+  var introductions = null
+  request.onload = function() {
+    introductions = request.response;
+    
+    // IMAGE
+    // NAME
+    // 
+    document.getElementById("introduction").innerHTML = introductions[20].introduction;
+  }
+
+
+  console.log(window.location)
+  console.log(window.HashChangeEvent)
+  console.log(window.location.hash)
+
+
+</script>
 </body>
 </html>
