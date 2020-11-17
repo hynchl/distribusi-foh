@@ -19,23 +19,24 @@
       div.frag                        {background:beige;}
 
       /***** common *****/
-      * { margin: 0; font-family: Arial, Helvetica, sans-serif; word-break: keep-all;}
+      * { margin: 0; font-family: Arial, Helvetica, "돋움", sans-serif; word-break: keep-all;}
       a, a:hover, a:visited {color:black;}
       .label {
         font-size: 24px;
         letter-spacing: 2px;
       }
 
-      a.menu {
+      #menu span a, #menu span a:visited {
         font-size: 18px;
         text-decoration: none;
       }
 
-      a.menu:hover {
-        /* 밑줄 효과 */
+      #menu span a:hover, #menu span a:active, #menu span a:focus {
+        text-decoration: underline;
+        text-underline-position: under;
       }
       
-      .body_text {
+      .col {
         font-size: 15px;
         line-height: 22.5px;
       }
