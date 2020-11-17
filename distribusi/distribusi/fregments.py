@@ -18,18 +18,31 @@ class Fregment:
 
 class Fregments:
     def __init__(self):
+        self.json_data = {}
         self.index = {}
         self.indextable = []
         self.timetable = []
+        self.ignore = ['.ignore']
 
-        self.config_file = 'config.json'
-        self.index_file = 'fregments_index.json'
+        self.ignore_file = '.ignore'
+        self.index_file = 'index.json'
 
-        with open(self.index_file) as json_file:
-            self.json_data = json.load(json_file)
+        if os.path.isfile(self.index_file):
+            with open(self.index_file) as json_file:
+                self.json_data = json.load(json_file)
 
         self.temp_data = {"fregments":[]}
         self.count = len(self.json_data)
+
+    def add_ignore(self, directory):
+        ignore_path = os.path.join(directory, self.ignore_file)
+        if os.path.isfile(ignore_path):
+            ignore = open(ignore_path, 'r')
+            ignore_lines = ignore.readlines()
+            for line in ignore_lines:
+                stripped_line = line.rstrip()
+                self.ignore.append(stripped_line)
+            print(self.ignore)
 
     def creation_date(self, path_to_file):
         """
@@ -55,7 +68,9 @@ class Fregments:
         if occupation > -1:
             origin_path = os.path.join(directory, file)
             date = self.creation_date(origin_path)
-            arr = directory.split("/")
+            arr = directory\
+                .split("/")
+            print(directory)
             if arr.__len__() == 2:
                 artist = arr[1]
             else:
@@ -80,6 +95,7 @@ class Fregments:
 
     def preindex(self, directory):
         for root, dirs, files in os.walk(directory):
+            self.add_ignore(root)
             arr = root.split("/")
             # 2뎁스까지만 인덱스 함.
             if arr.__len__() < 4:
@@ -87,12 +103,13 @@ class Fregments:
                 for f in files:
                     if self.is_meta(f):
                         pass
-                    elif f == "index.html" or f == ".DS_Store":
+                    elif f in self.ignore:
                         pass
                     elif self.has_meta(root, f):
                         self.occupancy(root, f)
                     else:
                         self.add_timetable(root, f)
+            if arr.__len__() > 2 and arr[2]:
                 # dirs index
                 for d in dirs:
                     if self.has_meta(root, d):

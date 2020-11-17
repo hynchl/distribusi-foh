@@ -7,15 +7,12 @@ from distribusi.distribusi import build_index
 parser = build_argparser()
 args = parser.parse_args()
 
-event_path = './events'
-data_path = './test_data'
+data_path = args.directory
 
 freg = fregments.Fregments()
-freg.preindex(event_path)
 freg.preindex(data_path)
 freg.postindex()
 
-distribusify(args, event_path, freg)
 distribusify(args, data_path, freg)
 
 build_index(args, data_path, freg)

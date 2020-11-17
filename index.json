@@ -2,18 +2,18 @@
     {
         "__Fregment__": {
             "index": 0,
-            "update": 1605171358.9636276,
-            "directory": "./events",
-            "artist": "events",
+            "update": 1605581893.2526722,
+            "directory": "./test_data/event_lecture",
+            "artist": "event_lecture",
             "file": "event_0000"
         }
     },
     {
         "__Fregment__": {
             "index": 1,
-            "update": 1605171365.1618817,
-            "directory": "./events",
-            "artist": "events",
+            "update": 1605584344.6146529,
+            "directory": "./test_data/event_lecture",
+            "artist": "event_lecture",
             "file": "event_0001"
         }
     },
@@ -74,9 +74,9 @@
     {
         "__Fregment__": {
             "index": 8,
-            "update": 1605171377.7292128,
-            "directory": "./events",
-            "artist": "events",
+            "update": 1605581893.2483907,
+            "directory": "./test_data/event_workshop",
+            "artist": "event_workshop",
             "file": "event_0008"
         }
     },
@@ -186,33 +186,6 @@
             "directory": "./test_data/fig",
             "artist": "fig",
             "file": "fig002.txt"
-        }
-    },
-    {
-        "__Fregment__": {
-            "index": 21,
-            "update": 1605170712.9904313,
-            "directory": "./events/event_0000",
-            "artist": "event_0000",
-            "file": "124469821_121248626457919_479957910997498417_n.jpg"
-        }
-    },
-    {
-        "__Fregment__": {
-            "index": 22,
-            "update": 1605170736.042438,
-            "directory": "./events/event_0000",
-            "artist": "event_0000",
-            "file": "124157237_121248643124584_872058020963845448_n.jpg"
-        }
-    },
-    {
-        "__Fregment__": {
-            "index": 23,
-            "update": 1605170741.7326746,
-            "directory": "./events/event_0000",
-            "artist": "event_0000",
-            "file": "124476076_121248659791249_2342598949363915450_n.jpg"
         }
     }
 ]
