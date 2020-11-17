@@ -1,3 +1,8 @@
+const SCALAR = 1;
+const THRESHOLD = 0;
+const INIT_DURATION = 300;
+const INIT_RATIO = 0.9;
+
 var Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
@@ -64,8 +69,6 @@ World.add(engine.world, [ceiling, floor, leftWall, rightWall, title, timeline]);
 Engine.run(engine);
 Render.run(render);
 
-SCALAR = 1;
-THRESHOLD = 0;
 
 window.addEventListener("resize", ()=>{
   // TODO : complete resize function
@@ -79,7 +82,7 @@ window.addEventListener("resize", ()=>{
 })
 
 let count = 0;
-let duration = 800;
+let duration = INIT_DURATION;
 let addFrags = ()=>{
   if (count >= frags.length){
     return;
@@ -88,7 +91,7 @@ let addFrags = ()=>{
     el.setAttribute("visibility", "visible")
     World.add(engine.world, frags[count]);
     count += 1;
-    duration *= 0.85;
+    duration *= INIT_RATIO;
     setTimeout(addFrags, duration)
   }
 }
