@@ -42,7 +42,6 @@ class Fregments:
             for line in ignore_lines:
                 stripped_line = line.rstrip()
                 self.ignore.append(stripped_line)
-            print(self.ignore)
 
     def creation_date(self, path_to_file):
         """
@@ -70,7 +69,6 @@ class Fregments:
             date = self.creation_date(origin_path)
             arr = directory\
                 .split("/")
-            print(directory)
             if arr.__len__() == 2:
                 artist = arr[1]
             else:
