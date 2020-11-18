@@ -99,7 +99,7 @@ def write_index(args,index, html, html_head, html_footer):
             if args.style:
                 fs = open(args.style, "r")
                 style = fs.read()
-                styled_html_head = html_head % style
+                styled_html_head = html_head# % style
             else:
                 styled_html_head = html_head % ''
                 print("---")
