@@ -246,7 +246,7 @@
         div#archive_list {
           display: none;
           position: absolute;
-          height:335px;
+          max-height:335px;
           width:200px;
           overflow-y: scroll;
           border: 1px solid;
@@ -282,6 +282,11 @@
         div.frag{
           /* background:beige; */
           margin:10px;
+        }
+
+        div.png, div.jpeg {
+          /* max-height:200px;
+          max-width: 1000px; */
         }
 
       }
