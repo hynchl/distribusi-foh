@@ -2,7 +2,6 @@
 # 2020. 10. 26
 from distribusi.cli import build_argparser, distribusify
 from distribusi import fragments
-from distribusi.distribusi import build_index
 
 parser = build_argparser()
 args = parser.parse_args()
@@ -14,5 +13,3 @@ freg.preindex(data_path)
 freg.postindex()
 
 distribusify(args, data_path, freg)
-
-build_index(args, data_path, freg)

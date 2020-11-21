@@ -25,10 +25,12 @@ class Fragments:
         self.ignore = ['.ignore']
 
         self.ignore_file = '.ignore'
-        self.index_file = 'test_data/index.json'
+        self.index_file = 'index.json'
 
-        if os.path.isfile(self.index_file):
-            with open(self.index_file) as json_file:
+    def init_json(self, directory):
+        index_path = os.path.join(directory, self.index_file)
+        if os.path.isfile(index_path):
+            with open(index_path) as json_file:
                 self.json_data = json.load(json_file)
 
         self.temp_data = {"fragments":[]}
@@ -92,28 +94,40 @@ class Fragments:
             return False
 
     def preindex(self, directory):
+        self.init_json(directory)
         for root, dirs, files in os.walk(directory):
             self.add_ignore(root)
+
+            print(root)
+
             arr = root.split("/")
-            # 2뎁스까지만 인덱스 함.
-            if arr.__len__() < 4:
-                # files index
-                for f in files:
-                    if self.is_meta(f):
-                        pass
-                    elif f in self.ignore:
-                        pass
-                    elif self.has_meta(root, f):
-                        self.occupancy(root, f)
-                    else:
-                        self.add_timetable(root, f)
-            if arr.__len__() > 2 and arr[2]:
-                # dirs index
-                for d in dirs:
-                    if self.has_meta(root, d):
-                        self.occupancy(root, d)
-                    else:
-                        self.add_timetable(root, d)
+
+            print(arr[2])
+
+            if arr[2] in self.ignore:
+                pass # ignore 폴더 처리
+            else:
+                # 2뎁스까지만 인덱스 함.
+                if arr.__len__() < 4:
+                    # files index
+                    for f in files:
+                        if self.is_meta(f):
+                            pass
+                        elif f in self.ignore:
+                            pass
+                        elif self.has_meta(root, f):
+                            self.occupancy(root, f)
+                        else:
+                            self.add_timetable(root, f)
+                if arr.__len__() > 2 and arr[2]:
+                    # dirs index
+                    for d in dirs:
+                        if self.has_meta(root, d):
+                            self.occupancy(root, d)
+                        elif d in self.ignore:
+                            pass
+                        else:
+                            self.add_timetable(root, d)
 
     def postindex(self):
         self.timetable = sorted(self.timetable, key=lambda fragment: fragment.update)
