@@ -16,15 +16,22 @@
       div#introduction                {background-color: violet;}
       div#archive                     {background-color: grey;}      
       div#frags                       {background-color:skyblue;}
-      div.frag                        {background:beige;} */
+      div.frag                        {background-color:beige;}
+      div.image                       {background-color:magenta}
+      div.pdf object                  {background-color:mediumaquamarine}
+      div.x-empty                     {background-color:mediumseagreen}
+      */
 
+
+      
       /***** common *****/
-      * { margin: 0; font-family: Arial, Helvetica, "돋움", sans-serif; word-break: keep-all;}
+      * { margin: 0; font-family: Arial, Helvetica, "돋움", sans-serif; word-break: keep-all; }
       a, a:hover, a:visited {color:black;}
       .label {
         font-size: 24px;
         letter-spacing: 2px;
       }
+      .shape                          {fill:none;} 
 
       #menu span a, #menu span a:visited {
         font-size: 18px;
@@ -46,8 +53,13 @@
         line-height: 26px;
       }
 
+      .focus {
+        animation: rainbowLinkText 0.5s;
+      }
+
       a:hover text, a:focus text, a:active text { animation-duration: 1s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
       @keyframes rainbowLink {0% {fill: #ff2a2a;} 15% {fill: #ff7a2a;} 30% {fill: #ffc52a; }45% {fill: #43ff2a; }60% {fill: #2a89ff; }75% {fill: #202082; }90% {fill: #6b2aff; } 100% {fill: #e82aff; }}
+      @keyframes rainbowLinkText {0% {color: #ff2a2a;} 15% {color: #ff7a2a;} 30% {color: #ffc52a; }45% {color: #43ff2a; }60% {color: #2a89ff; }75% {color: #202082; }90% {color: #6b2aff; } 100% {color: #e82aff; }}
       
       /***** mobile *****/
 
@@ -58,7 +70,8 @@
           padding-top:120px;
           position:fixed;
           z-index:10;
-          text-align:center;
+          text-align:left;
+          /* padding-left:30px; */
           transition: 0.3s;
         }
 
@@ -68,6 +81,9 @@
           position:relative; 
           margin:5px;
         }
+
+        div#menu>span#to_about{margin-left: 20px;}
+        div#menu>span#to_timeline{display: none;} /*temp*/
 
         div#logo_wrapper {
           position:absolute;
@@ -84,6 +100,7 @@
         img#about_icon { width:80px; }
 
         div#timeline_icon_wrapper {
+          display: none;
           position:fixed;
           right: 30px;
           bottom: 30px;
@@ -134,8 +151,48 @@
         }
         img#icon_fb, img#icon_ig { height: 40px; margin-right:20px;}
 
+        g {
+          animation: anim_tranparency 0.3s;
+      }
+
+      /* FRAGMENT ==> AUTHOR ==> ARCHIVE DROP-DOWN */
+      div#archive {
+        margin:10px;
+      }      
+      div#archive:hover #archive_list{display: block;}
+
+      div#archive_list {
+        display: none;
+        position: absolute;
+        max-height:335px;
+        width:200px;
+        overflow-y: scroll;
+        border: 1px solid;
+        z-index: 10;
+      }
+      
+      div#archive_list a {
+        display: block;
+        background-color: #fff;
+        border-top: 1px solid;
+        padding: 6px 6px;
+      }
+      div#archive_list a:nth-child(1) {border-top: none;}
+      
+      button#archive_button{
+        width:100px;
+        background:#fff;
+        border:1px solid;
+        height: 30px;
+      }
+
+      img#icon_archive_more {width: 16px;}
+
+
+      
+      
       /***** pc *****/
-      @media ( min-width: 720px ) {
+      @media ( min-width: 780px ) {
         
         /* MENU */
         #menu {
@@ -152,9 +209,9 @@
           top:35px;
         }
         /* div#menu>span{  } */
-        div#menu>span#to_about     {   left:30px;  }
-        div#menu>span#to_fragments {   left:120px; }
-        div#menu>span#to_timeline  {   right:30px; }
+        div#menu>span#to_about     {   left:95px;  }
+        div#menu>span#to_fragments {   left:190px; }
+        div#menu>span#to_timeline  {   right:105px; }
 
         div#logo_wrapper {
           position:absolute;
@@ -225,7 +282,7 @@
           width: 300px;
           position: fixed;
           z-index: 10;
-          left: 30px;
+          left: 100px;
           height: calc(100% - 200px);
         }
 
@@ -237,46 +294,15 @@
           margin:10px;
         }
 
-        /* FRAGMENT ==> AUTHOR ==> ARCHIVE DROP-DOWN */
-        div#archive {
-          margin:10px;
-        }      
-        div#archive:hover #archive_list{display: block;}
-  
-        div#archive_list {
-          display: none;
-          position: absolute;
-          max-height:335px;
-          width:200px;
-          overflow-y: scroll;
-          border: 1px solid;
-        }
-        
-        div#archive_list a {
-          display: block;
-          background-color: #fff;
-          border-top: 1px solid;
-          padding: 6px 6px;
-        }
-        div#archive_list a:nth-child(1) {border-top: none;}
-        
-        button#archive_button{
-          width:100px;
-          background:#fff;
-          border:1px solid;
-          height: 30px;
-        }
-
-        img#icon_archive_more {width: 16px;}
-
+        /*archive_list was here*/
         /* FRAGMENT ==> CONTENTS */
         div#frags{
           position: absolute;
           /* background-color:skyblue; */
-          left:400px;
+          left:480px;
           top:50px;
-          width: calc(100% - 450px);
-          height:2000px;
+          width: calc(100% - 530px);
+          /* height:2000px; */
         }
 
         div.frag{
@@ -315,11 +341,50 @@
 
 
       /*  default */
-      .image{max-width: 100%;}
-      .pdf object{width:640px;height: 640px;}
+
+      div#frags>div {
+        margin-bottom: 30px;
+        padding-top: 50px;
+        display: inline-block;
+        margin-right:30px;
+        /* border-top: solid 1px #000; */
+        vertical-align: top;
+        padding:20px;
+      }
+
+      div#frags>a {
+        display:none;
+      }
+      
+      span.filename, figcaption {
+        font-style: italic;
+      }
+    
+
+
+      .image{width:80%; max-width: 600px;}
+      .pdf object{width:100%;height: 600px;}
+      .x-empty, .plain, .rtf, .unkown-file, .quicktime, video, .pdf{width:80%; max-width: 600px;}
       .dir::before{content:"📁 ";font-size:18px;}
       .filename{display:block;font-family:mono;}
       .unkown-file::before{content:"📄 ";font-size:18px;}
       /* div{max-width: 640px;display:inline-block;vertical-align:top;margin:1em;padding:1em;} */
-      video {width:640px;max-height:640px;}
+      video {width: 80%;max-width: 600px;}
       
+
+      @keyframes anim_tranparency {
+        0% {
+        /* 투명도가 0, 즉, 보이지 않음*/
+        opacity: 0;
+        }
+        /* 1초 기준 0.7부터 보이기 시작함*/
+        70% {
+        /* 투명도가 0, 즉, 보이지 않음*/
+        opacity: 0;
+        }
+        /* 1초 기준, 0.9초에 완전히 보임*/
+        90% {
+        /* 투명도가 1, 즉, 보임*/
+        opacity: 1;
+        }
+    }
