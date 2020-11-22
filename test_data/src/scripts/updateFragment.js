@@ -38,7 +38,6 @@ const participants = [
     { "name":"당근", "path":"carrot", "fragId":"hyunchul"},
 ]
 
-
 const SCALAR = 1;
 const THRESHOLD = 0;
 const INIT_DURATION = 300;
@@ -64,81 +63,126 @@ var render = Render.create({
                 }
              });
 
-var ceiling = Bodies.rectangle(window.innerWidth/2, 0, window.innerWidth, 60, { isStatic: true });
-var floor = Bodies.rectangle(window.innerWidth/2, window.innerHeight-100, window.innerWidth, 60, { isStatic: true });
-var leftWall = Bodies.rectangle(0, window.innerHeight/2, 60, window.innerHeight, { isStatic: true });
-var rightWall = Bodies.rectangle(window.innerWidth, window.innerHeight/2, 60, window.innerHeight, { isStatic: true });
-var title = Bodies.rectangle(window.innerWidth/2, 0, 300, 200, { isStatic: true });
-var timeline = Bodies.rectangle(window.innerWidth-60, window.innerHeight-150, 150, 150, { isStatic: true });
+var ceiling = Bodies.rectangle(render.canvas.width/2, 0, render.canvas.width, 120, { isStatic: true, friction:0, restitution:0.5 });
+var leftWall = Bodies.rectangle(0, window.innerHeight/2, 60, window.innerHeight, { isStatic: true, friction:0, restitution:0.5 });
+var rightWall = Bodies.rectangle(render.canvas.width, window.innerHeight/2, 60, window.innerHeight, { isStatic: true, friction:0, restitution:0.5 }); //update
+var title = Bodies.rectangle(render.canvas.width/2, 0, 300, 200, { isStatic: true, friction:0, restitution:0.5 });
+var timeline = Bodies.rectangle(render.canvas.width-60, window.innerHeight-150, 150, 150, { isStatic: true, friction:0, restitution:0.5 });
 
 engine.world.gravity = {scale: 0.0001, x: 0, y: 0}
-World.add(engine.world, [ceiling, floor, leftWall, rightWall, title, timeline]);
+World.add(engine.world, [ceiling, leftWall, rightWall, title, timeline]);
 Engine.run(engine);
 Render.run(render);
 
-let _svg = document.getElementById('_frags');
-let svg = document.getElementById('frags');
+let _svg = document.getElementById('_frags'); // original shape 
+let svg = document.getElementById('frags'); // display
 
-
-
+// get current fragment information
 var frag_requestURL = `${window.location.origin}/index.json`;
 var frag_request = new XMLHttpRequest();
 frag_request.open('GET', frag_requestURL);
 frag_request.responseType = 'json';
 frag_request.send();
 
+
+const FIRST_LOADING_NUM = 20;
+
 var fragments = null;
+var frag_disp = [];
 frag_request.onload = function() {
+    // after loading fragments information
     fragments = frag_request.response;
-    fragments = peelFragment(fragments);
-
-    //
-    for(let i = 0; i < fragments.length; i++){
-        let p = findElementByProperty(participants, 'path', `${fragments[i].artist}`)
-        if (fragments[i].artist == "") continue;
-        
-        let item = document.createElement("a");
-        item.setAttribute("href", `/${fragments[i].artist}/#${convertIndexToString(fragments[i].index)}`);
-        svg.appendChild(item);
-
-        let frag = document.querySelector(`._${p.fragId}`).cloneNode(true);
-        frag.classList=[];
-        frag.classList.add(p.fragId);
-        item.appendChild(frag);
-        // 1. children에서 shape를 찾아야함
-        // 2. 
-        // console.log(frag.childNodes)
-        console.log($(`.${p.fragId}`).children('.shape'));
-        
-        // svg.appendChild(frag);
-
-        // todo 
-        }
-        document.getElementById('fragments_wrapper').appendChild(svg.cloneNode(true));
-
+    fragments = peelFragment(fragments); 
+    let count = FIRST_LOADING_NUM-1;
+    while(count>=0){
+        addFrag();
+        count -= 1;
+    }
 }
 
-const addFragToWorld = (frag) => {
-    console.log(path);
-    var v = Bodies.fromVertices(100+(i*80), 80, Svg.pathToVertices(path, 20), {
+color = ['#556270'];
+
+const addFrag = () => {
+    let _frag = fragments.shift();
+    let p = findElementByProperty(participants, 'path', `${_frag.artist}`)
+    if (_frag.artist == "") return;
+    let frag = document.querySelector(`._${p.fragId}`).cloneNode(true); // get fragments by artist
+    frag.classList=[];
+    frag.id= `_${_frag.index}`;
+    frag.childNodes[0].setAttribute("href", `${window.location.origin}/${_frag.artist}/#${convertIndexToString(_frag.index)}`);
+    
+    let text = frag.children[0].children[frag.children[0].children.length - 1];
+    text.innerHTML = `#${convertIndexToString(_frag.index)}`
+    
+    let shape = frag.children[0].children[0];
+    
+    svg.appendChild(frag);
+    frag_disp.push(addFragToWorld(shape));
+}
+let initY= 0;
+const addFragToWorld = (path) => {
+    var v = Bodies.fromVertices(100, getScrollTop(), Svg.pathToVertices(path, 20), {
       render: {
         fillStyle: color,
         strokeStyle: color
       },
       position: {
-        x: window.innerWidth/2 + (Math.random() - 0.5) * window.innerWidth*0.8,
-        y: window.innerHeight/3 + (Math.random() - 0.5) * window.innerHeight*0.3
+        x: render.canvas.width/2 + (Math.random() - 0.5) * render.canvas.width*0.8 - 50,
+        y: initY// + (Math.random()-0.3) * window.innerHeight*0.1 // ****
       },
       mass: 0.01,
       restitution: 0.5,
-      name: path.parentNode.id
+      friction:0,
+      name: path.parentNode.parentNode.id
     }, true);
-
-    let el = document.getElementById(path.parentNode.id)
-    el.setAttribute("visibility", "hidden")
-
-    frags.push(v);
+    initY += (window.innerWidth >= 960)?40:75;
+    World.add(engine.world, v);
+    let el = document.getElementById(path.parentNode.parentNode.id)
+    el.setAttribute("visibility", "visible")
+    return v;
 }
+
+let maxY = 0;
+let scrollChanged = false;
+setInterval(()=>{
+    if (!scrollChanged) return;
+    if(fragments.length <= 0) return;
+
+    let count = 1;
+    while(count>=0 && fragments.length > 0){
+        addFrag()
+        count -= 1;    
+    }
+    scrollChanged = false;
+}, 30);
+
+
+setInterval(()=>{
+    // update fragment position
+    for(let i = 0; i < frag_disp.length; i++) {
+        frag_disp[i].angle = 0; // lock rotation
+        // if((frag_disp[i].velocity.x > THRESHOLD) || (frag_disp[i].velocity.y > THRESHOLD)){
+            let el = document.getElementById(`${frag_disp[i].name}`);
+            let x = frag_disp[i].bounds.min.x * SCALAR
+            let y = frag_disp[i].bounds.min.y * SCALAR
+            el.setAttribute('transform', "translate("+x+","+y+")");
+        // }
+    }
+
+    let bodies = engine.world.bodies.filter(body => body.label === "Body");
+    maxY = bodies.sort((a, b) => (b.position.y - a.position.y))[0].position.y;
+    // if (maxY > getDocumentHeight()) return;
+
+
+    // expand the height
+    render.canvas.height = Math.max(window.innerHeight, maxY);
+    document.querySelector('#frags').style.height = render.canvas.height + 200;
+    if(leftWall.position.y+window.innerHeight/2 <getDocumentHeight()){
+        leftWall = Bodies.rectangle(0, leftWall.position.y + render.canvas.width, 60, window.innerHeight, { isStatic: true });
+        rightWall = Bodies.rectangle(render.canvas.width, rightWall.position.y + window.innerHeight, 60, window.innerHeight, { isStatic: true }); //update
+        World.add(engine.world, [leftWall, rightWall]);
+    }
+  }, 15)
 
 let peelFragment = (arr) => {
     let frags = []
@@ -154,4 +198,27 @@ let findElementByProperty = (arr, key, value) => {
     for(var i = 0, len = arr.length; i < len; i++)
         if (arr[i][key] === value) return arr[i];
     return -1;
+}
+
+let prev = window.screenTop;
+window.addEventListener('scroll', () => {
+    if((getScrollTop() - prev > 0) || (getDocumentHeight()-(window.innerHeight+5) <= getScrollTop)){
+        scrollChanged = true;
+    }
+    prev = getScrollTop();
+});
+
+// 현재 스크롤한 높이를 구하는 함수 
+function getScrollTop() {
+    return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+}
+// 문서의 높이를 구하는 함수
+function getDocumentHeight() {
+    const body = document.body;
+    const html = document.documentElement;
+    
+    return Math.max(
+        body.scrollHeight, body.offsetHeight,
+        html.clientHeight, html.scrollHeight, html.offsetHeight
+    );
 }
