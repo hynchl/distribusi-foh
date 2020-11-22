@@ -16,7 +16,7 @@ const participants = [
     { "name":"신민", "path":"Min_Shin", "fragId":"minShin"},
     { "name":"안세원", "path":"sewon", "fragId":"sewon"},
     { "name":"노다예", "path":"Dah_Yee_Noh", "fragId":"dahYeeNoh"},
-    {   "name":"무밍", "path":"mooming", "fragId":"mooming"},
+    { "name":"무밍", "path":"mooming", "fragId":"mooming"},
     { "name":"양승욱", "path":"Seungwook_Yang", "fragId":"seungwookYang"},
     { "name":"배인숙", "path":"Insook_Bae", "fragId":"insookBae"},
     { "name":"빈곤사회연대", "path":"Korean_Peoples_Solidarity_Against_Poverty", "fragId":"kpsap"},
@@ -38,42 +38,107 @@ const participants = [
     { "name":"당근", "path":"carrot", "fragId":"hyunchul"},
 ]
 
-    let _svg = document.getElementById('_frags');
-    let svg = document.getElementById('frags');
 
-  var frag_requestURL = `${window.location.origin}/index.json`;
-  var frag_request = new XMLHttpRequest();
-  frag_request.open('GET', frag_requestURL);
-  frag_request.responseType = 'json';
-  frag_request.send();
+const SCALAR = 1;
+const THRESHOLD = 0;
+const INIT_DURATION = 300;
+const INIT_RATIO = 0.9;
 
-  var fragments = null;
-  frag_request.onload = function() {
+var Engine = Matter.Engine,
+    Render = Matter.Render,
+    World = Matter.World,
+    Bodies = Matter.Bodies,
+    Composites = Matter.Composites,
+    Common = Matter.Common,
+    Svg = Matter.Svg,
+    Vertices = Matter.Vertices;
+
+var engine = Engine.create();
+var render = Render.create({
+                element: document.body,
+                engine: engine,
+                options: {
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                    wireframes: false,
+                }
+             });
+
+var ceiling = Bodies.rectangle(window.innerWidth/2, 0, window.innerWidth, 60, { isStatic: true });
+var floor = Bodies.rectangle(window.innerWidth/2, window.innerHeight-100, window.innerWidth, 60, { isStatic: true });
+var leftWall = Bodies.rectangle(0, window.innerHeight/2, 60, window.innerHeight, { isStatic: true });
+var rightWall = Bodies.rectangle(window.innerWidth, window.innerHeight/2, 60, window.innerHeight, { isStatic: true });
+var title = Bodies.rectangle(window.innerWidth/2, 0, 300, 200, { isStatic: true });
+var timeline = Bodies.rectangle(window.innerWidth-60, window.innerHeight-150, 150, 150, { isStatic: true });
+
+engine.world.gravity = {scale: 0.0001, x: 0, y: 0}
+World.add(engine.world, [ceiling, floor, leftWall, rightWall, title, timeline]);
+Engine.run(engine);
+Render.run(render);
+
+let _svg = document.getElementById('_frags');
+let svg = document.getElementById('frags');
+
+
+
+var frag_requestURL = `${window.location.origin}/index.json`;
+var frag_request = new XMLHttpRequest();
+frag_request.open('GET', frag_requestURL);
+frag_request.responseType = 'json';
+frag_request.send();
+
+var fragments = null;
+frag_request.onload = function() {
     fragments = frag_request.response;
     fragments = peelFragment(fragments);
 
+    //
     for(let i = 0; i < fragments.length; i++){
-        let p = findElementByProperty(participants, 'path', fragments[i].artist)
+        let p = findElementByProperty(participants, 'path', `${fragments[i].artist}`)
         if (fragments[i].artist == "") continue;
         
         let item = document.createElement("a");
-        item.setAttribute("href", `${fragments[i].artist}/#${convertIndexToString(fragments[i].index)}`);
+        item.setAttribute("href", `/${fragments[i].artist}/#${convertIndexToString(fragments[i].index)}`);
         svg.appendChild(item);
 
-        let frag = document.querySelector(`.${p.fragId}`).cloneNode(true);
+        let frag = document.querySelector(`._${p.fragId}`).cloneNode(true);
+        frag.classList=[];
+        frag.classList.add(p.fragId);
         item.appendChild(frag);
+        // 1. children에서 shape를 찾아야함
+        // 2. 
+        // console.log(frag.childNodes)
+        console.log($(`.${p.fragId}`).children('.shape'));
+        
+        // svg.appendChild(frag);
 
         // todo 
-
-    }
+        }
+        document.getElementById('fragments_wrapper').appendChild(svg.cloneNode(true));
 
 }
 
-// 최초 30개 , 스크롤 속도에 비례해서 추가적으로 조각 생겨나도록!
-// 다 만들었으면 깜빡 효과 주고
+const addFragToWorld = (frag) => {
+    console.log(path);
+    var v = Bodies.fromVertices(100+(i*80), 80, Svg.pathToVertices(path, 20), {
+      render: {
+        fillStyle: color,
+        strokeStyle: color
+      },
+      position: {
+        x: window.innerWidth/2 + (Math.random() - 0.5) * window.innerWidth*0.8,
+        y: window.innerHeight/3 + (Math.random() - 0.5) * window.innerHeight*0.3
+      },
+      mass: 0.01,
+      restitution: 0.5,
+      name: path.parentNode.id
+    }, true);
 
+    let el = document.getElementById(path.parentNode.id)
+    el.setAttribute("visibility", "hidden")
 
-
+    frags.push(v);
+}
 
 let peelFragment = (arr) => {
     let frags = []

@@ -81,8 +81,7 @@ window.addEventListener("resize", ()=>{
   rightWall.position.x = window.innerWidth;
 })
 
-let count = 0;
-let duration = INIT_DURATION;
+let count, duration = 0, INIT_DURATION;
 let addFrags = ()=>{
   if (count >= frags.length){
     return;

@@ -1,6 +1,6 @@
 
       /***** temp color *****/
-      body                            {background-color: gray;}
+      /* body                            {background-color: gray;}
       #menu                           {background-color: yellow;}
       #menu>span                      {background-color: green;}
       div#logo_wrapper                {background-color:cyan;}
@@ -16,7 +16,7 @@
       div#introduction                {background-color: violet;}
       div#archive                     {background-color: grey;}      
       div#frags                       {background-color:skyblue;}
-      div.frag                        {background:beige;}
+      div.frag                        {background:beige;} */
 
       /***** common *****/
       * { margin: 0; font-family: Arial, Helvetica, "돋움", sans-serif; word-break: keep-all;}
