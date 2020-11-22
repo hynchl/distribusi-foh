@@ -14,6 +14,7 @@
             .cls-3 {
                 letter-spacing: -0.06em;
             }
+            .shape{fill:none;}
         </style>
     </defs>
     <g id="kpsap">

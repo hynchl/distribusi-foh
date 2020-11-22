@@ -18,6 +18,7 @@
             .cls-4 {
                 letter-spacing: -0.07em;
             }
+            .shape{fill:none;}
         </style>
     </defs>
     <g id="seungwookYang">

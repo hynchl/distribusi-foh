@@ -15,6 +15,7 @@
             .cls-3 {
                 letter-spacing: 0em;
             }
+            .shape{fill:none;}
         </style>
     </defs>
     <g id="wonjung">

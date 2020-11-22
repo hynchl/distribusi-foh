@@ -10,6 +10,7 @@
                 fill: #231f20;
                 font-family: ArialMT, Arial;
             }
+            .shape{fill:none;}
         </style>
     </defs>
     <g id="doohoyi">
