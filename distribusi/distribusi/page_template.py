@@ -68,6 +68,7 @@ html_footer = """
 </div>
 <script src="/src/scripts/updateIntroduction.js"></script>
 <script src="/src/scripts/updateArchive.js"></script>
+<script src="/src/scripts/hashEvent.js"></script>
 </body>
 </html>
 """
