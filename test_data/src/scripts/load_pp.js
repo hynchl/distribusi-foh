@@ -1,4 +1,4 @@
-var requestURL = 'http://localhost:8000/introduction.json';
+var requestURL = `${window.location.origin}/introduction.json`;
 var request = new XMLHttpRequest();
 request.open('GET', requestURL);
 request.responseType = 'json';
