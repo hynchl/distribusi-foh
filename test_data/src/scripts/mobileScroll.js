@@ -9,7 +9,6 @@ setInterval(function() { if (didScroll) {
 
 function hasScrolled() { 
     
-    console.log(window.innerWidth)
     if (window.innerWidth < 720){
         if (window.scrollY > 50) {
             $("#menu").css("padding-top","0px");
