@@ -28,9 +28,9 @@ class Fragments:
         self.index_file = 'index.json'
 
     def init_json(self, directory):
-        index_path = os.path.join(directory, self.index_file)
-        if os.path.isfile(index_path):
-            with open(index_path) as json_file:
+        self.index_path = index_path = os.path.join(directory, self.index_file)
+        if os.path.isfile(self.index_path):
+            with open(self.index_path) as json_file:
                 self.json_data = json.load(json_file)
 
         self.temp_data = {"fragments":[]}
@@ -191,7 +191,7 @@ class Fragments:
 
     def save(self):
         print(json.dumps(self.indextable, cls=CustomEncoder))
-        with open(self.index_file, 'w') as outfile:
+        with open(self.index_path, 'w') as outfile:
             json.dump(self.indextable, outfile, indent=4, cls=CustomEncoder)
         self.count = len(self.indextable)
 
