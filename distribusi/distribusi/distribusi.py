@@ -217,13 +217,13 @@ def distribusify(args, directory, freg):  # noqa
                 html.insert(0, div(args, 'dir', 'dir', a, 'folder'))
                 '''
 
-
-            index = os.path.join(root, 'index.html')
-            if os.path.exists(index):
-                if check_distribusi_index(args, index):
-                   write_index(args,index,html, html_head, html_footer)
-            elif not os.path.exists(index):
-                write_index(args,index,html, html_head, html_footer)
+            if not directory == root:
+                index = os.path.join(root, 'index.html')
+                if os.path.exists(index):
+                    if check_distribusi_index(args, index):
+                       write_index(args,index,html, html_head, html_footer)
+                elif not os.path.exists(index):
+                    write_index(args,index,html, html_head, html_footer)
 
         if args.remove_index:
             index = os.path.join(root, 'index.html')

@@ -98,11 +98,7 @@ class Fragments:
         for root, dirs, files in os.walk(directory):
             self.add_ignore(root)
 
-            print(root)
-
             arr = root.split("/")
-
-            print(arr[2])
 
             if arr[2] in self.ignore:
                 pass # ignore 폴더 처리
