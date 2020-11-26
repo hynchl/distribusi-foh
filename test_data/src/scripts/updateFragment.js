@@ -103,21 +103,25 @@ frag_request.onload = function() {
 color = ['#556270'];
 
 const addFrag = () => {
-    let _frag = fragments.shift();
-    let p = findElementByProperty(participants, 'path', `${_frag.artist}`)
-    if (_frag.artist == "") return;
-    let frag = document.querySelector(`._${p.fragId}`).cloneNode(true); // get fragments by artist
-    frag.classList=[];
-    frag.id= `_${_frag.index}`;
-    frag.childNodes[0].setAttribute("href", `${window.location.origin}/${_frag.artist}/#${convertIndexToString(_frag.index)}`);
-    
-    let text = frag.children[0].children[frag.children[0].children.length - 1];
-    text.innerHTML = `#${convertIndexToString(_frag.index)}`
-    
-    let shape = frag.children[0].children[0];
-    
-    svg.appendChild(frag);
-    frag_disp.push(addFragToWorld(shape));
+    try{
+        let _frag = fragments.shift();
+        let p = findElementByProperty(participants, 'path', `${_frag.artist}`)
+        if (_frag.artist == "") return;
+        let frag = document.querySelector(`._${p.fragId}`).cloneNode(true); // get fragments by artist
+        frag.classList=[];
+        frag.id= `_${_frag.index}`;
+        frag.childNodes[0].setAttribute("href", `${window.location.origin}/${_frag.artist}/#${convertIndexToString(_frag.index)}`);
+        
+        let text = frag.children[0].children[frag.children[0].children.length - 1];
+        text.innerHTML = `#${convertIndexToString(_frag.index)}`
+        
+        let shape = frag.children[0].children[0];
+        
+        svg.appendChild(frag);
+        frag_disp.push(addFragToWorld(shape));
+    } catch(e) {
+
+    }
 }
 let initY= 0;
 const addFragToWorld = (path) => {
