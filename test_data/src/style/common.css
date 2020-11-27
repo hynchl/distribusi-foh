@@ -25,7 +25,7 @@
 
       
       /***** common *****/
-      * { margin: 0; font-family: Arial, Helvetica, "돋움", sans-serif; word-break: keep-all; }
+      * { margin: 0; font-family: Arial, Helvetica, "돋움", sans-serif; word-break: normal; }
       a, a:hover, a:visited {color:black;}
       .label {
         font-size: 24px;
