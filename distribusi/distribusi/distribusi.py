@@ -166,9 +166,9 @@ def distribusify(args, directory, freg):  # noqa
                             elif subtype in CODE_TYPES or name.endswith('.txt'):
                                 # if the plain text is code,
                                 # which types do we wrap in pre-tags?
-                                a = "<pre>" + open(full_path).read() + "</pre>"
+                                a = "<div>" + open(full_path).read() + "</div>"
                             elif subtype == 'markdown' or name.endswith('.md'):
-                                a = "<pre>" + markdown.markdown(open(full_path).read()) + "</pre>"
+                                a = "<div>" + markdown.markdown(open(full_path).read()) + "</div>"
                                 pass
                             else:
                                 subtype = subtype+' unkown-file'
