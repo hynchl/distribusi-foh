@@ -306,8 +306,9 @@
           margin:10px;
         }
 
-        div#fragments_wrapper > img {
+        div#fragment_wrapper > img {
           width: fit-content;
+          min-width: 100px;
         }
 
         div#introduction {
