@@ -47,14 +47,14 @@ html_head = """
     </div>
     <div id="introduction">
     </div>
+  </div>
 
-    <div id="archive">
-      <button id="archive_button">ARCHIVE
-        <img id="icon_archive_more" src="/src/img/icon_timeline.svg" alt="">
-      </button>
-      <div id="archive_list">
-        <a href="#">조각#1234</a>
-      </div>
+  <div id="archive_exit" style="display:none;"></div>
+  <div id="archive">
+    <button id="archive_button">ARCHIVE
+      <!-- <img id="icon_archive_more" src="src/img/icon_timeline.svg" alt=""> -->
+    </button>
+    <div id="archive_list">
     </div>
   </div>
 
@@ -69,6 +69,7 @@ html_footer = """
 <script src="/src/scripts/updateIntroduction.js"></script>
 <script src="/src/scripts/updateArchive.js"></script>
 <script src="/src/scripts/hashEvent.js"></script>
+<script src="/src/scripts/mobileArchiveEvent.js"></script>
 </body>
 </html>
 """
