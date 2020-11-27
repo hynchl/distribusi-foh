@@ -19,8 +19,9 @@
       div.frag                        {background-color:beige;}
       div.image                       {background-color:magenta}
       div.pdf object                  {background-color:mediumaquamarine}
-      div.x-empty                     {background-color:mediumseagreen}
+      div.x-empty                     {background-color:mediumseagreen} 
       */
+     
 
 
       
@@ -54,7 +55,7 @@
       }
 
       .focus {
-        animation: rainbowLinkText 0.5s;
+        animation: rainbowLinkText 3s;
       }
 
       a:hover text, a:focus text, a:active text { animation-duration: 1s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
@@ -156,19 +157,34 @@
       }
 
       /* FRAGMENT ==> AUTHOR ==> ARCHIVE DROP-DOWN */
-      div#archive {
-        margin:10px;
+
+      div#archive_exit {
+        top:0px;
+        background-color: rgba(123, 60, 99, 0.9);
+        z-index: 99;
+        position: fixed;
+        width: 100%;
+        height: 100%;
       }      
-      div#archive:hover #archive_list{display: block;}
+
+      div#archive {
+        margin:0px;
+        position: fixed;
+        bottom: 0px;
+        width:100%;
+        z-index: 100;
+      }      
 
       div#archive_list {
         display: none;
         position: absolute;
         max-height:335px;
-        width:200px;
+        width:100%;
         overflow-y: scroll;
         border: 1px solid;
-        z-index: 10;
+        bottom: 40px;
+        /* z-index: 10; */
+        background:#fff;
       }
       
       div#archive_list a {
@@ -180,10 +196,10 @@
       div#archive_list a:nth-child(1) {border-top: none;}
       
       button#archive_button{
-        width:100px;
+        width:100%;
         background:#fff;
         border:1px solid;
-        height: 30px;
+        height: 40px;
       }
 
       img#icon_archive_more {width: 16px;}
@@ -290,11 +306,43 @@
           margin:10px;
         }
 
+        div#fragments_wrapper > img {
+          width: fit-content;
+        }
+
         div#introduction {
           margin:10px;
         }
 
-        /*archive_list was here*/
+        /* FRAGMENT ==> AUTHOR ==> ARCHIVE DROP-DOWN */
+        div#archive {
+          width:140px;
+          top: 100px;
+          right: 100px;
+        }      
+
+        div#archive:hover #archive_list{
+          display: block;
+        }
+
+        div#archive_list {
+          bottom:auto;
+          top:30px;
+          width:300px;
+          right:0px;
+          /* z-index: 10; */
+        }
+        button#archive_button{
+          width:100%;
+          background:#fff;
+          border:1px solid;
+          height: 30px;
+        }
+
+        /* img#icon_archive_more {width: 16px;} */
+
+
+
         /* FRAGMENT ==> CONTENTS */
         div#frags{
           position: absolute;
