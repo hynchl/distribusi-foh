@@ -115,8 +115,12 @@ def write_index(args,index, html, html_head, html_footer):
 def render_dir(args, directory):
     html = []
     print(directory)
+
     for root, dirs, files in os.walk(directory):
         for name in sorted(files):
+            lv = root.split("/")
+            relative = lv[len(lv) - 1]
+            relative_path = "./{}/{}".format(relative, name)
 
             if 'index.html' not in name:
                 full_path = os.path.join(root, name)
@@ -131,9 +135,7 @@ def render_dir(args, directory):
 
                 if type_ in FILE_TYPES:
 
-                    lv = root.split("/")
-                    relative = lv[len(lv) - 1]
-                    relative_path = "./{}/{}".format(relative, name)
+
 
                     a = FILE_TYPES[type_].format(relative_path, caption)
 
@@ -176,7 +178,7 @@ def render_dir(args, directory):
                         print(type_, subtype, message, name)
                         subtype = subtype + ' unkown-file'
 
-                a = a.replace('{}', relative)
+                a = a.replace('{}', relative_path)
                 id = uuid.uuid1()
                 html.append(div(args, type_, subtype, a, name, id))
     result = ""
