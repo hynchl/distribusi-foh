@@ -117,7 +117,6 @@ def render_dir(args, directory):
     print(directory)
     for root, dirs, files in os.walk(directory):
         for name in sorted(files):
-            print(">>> {} <<<".format(name))
 
             if 'index.html' not in name:
                 full_path = os.path.join(root, name)
@@ -132,7 +131,11 @@ def render_dir(args, directory):
 
                 if type_ in FILE_TYPES:
 
-                    a = FILE_TYPES[type_].format(name, caption)
+                    lv = root.split("/")
+                    relative = lv[len(lv) - 1]
+                    relative_path = "./{}/{}".format(relative, name)
+
+                    a = FILE_TYPES[type_].format(relative_path, caption)
 
                     # expansion for different kind of text files
                     if type_ == 'text':
@@ -153,11 +156,7 @@ def render_dir(args, directory):
                             # a = FILE_TYPES[type_]
 
                     if type_ == 'image':
-                        print("directory:{}, name:{}".format(directory, name))
 
-                        lv = root.split("/")
-                        relative = lv[len(lv)-1]
-                        relative_path = "./{}/{}".format(relative, name)
 
                         a = FILE_TYPES[type_].format(relative_path, caption)
                         if args.thumbnail:
