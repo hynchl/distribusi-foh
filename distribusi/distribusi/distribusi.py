@@ -156,8 +156,6 @@ def render_dir(args, directory):
                             # a = FILE_TYPES[type_]
 
                     if type_ == 'image':
-
-
                         a = FILE_TYPES[type_].format(relative_path, caption)
                         if args.thumbnail:
                             a = thumbnail(relative_path, relative_path, args)
@@ -178,7 +176,7 @@ def render_dir(args, directory):
                         print(type_, subtype, message, name)
                         subtype = subtype + ' unkown-file'
 
-                a = a.replace('{}', name)
+                a = a.replace('{}', relative)
                 id = uuid.uuid1()
                 html.append(div(args, type_, subtype, a, name, id))
     result = ""
