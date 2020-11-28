@@ -11,7 +11,7 @@ import markdown
 from distribusi.page_template import html_footer, html_head
 from distribusi.mappings import CODE_TYPES, FILE_TYPES, SUB_TYPES
 from distribusi import fragments
-
+import uuid
 
 
 MIME_TYPE = magic.Magic(mime=True)
@@ -112,6 +112,82 @@ def write_index(args,index, html, html_head, html_footer):
             f.write(html_footer)
 
 
+def render_dir(args, directory):
+    html = []
+    print(directory)
+    for root, dirs, files in os.walk(directory):
+        for name in sorted(files):
+            print(">>> {} <<<".format(name))
+
+            if 'index.html' not in name:
+                full_path = os.path.join(root, name)
+                mime = MIME_TYPE.from_file(full_path)
+                # example: MIME plain/text becomes 'type' plain 'subtype' text
+                type_, subtype = mime.split('/')
+
+                caption = name
+
+                if args.verbose:
+                    print('Found file in dir ', name, 'as', mime)
+
+                if type_ in FILE_TYPES:
+
+                    a = FILE_TYPES[type_].format(name, caption)
+
+                    # expansion for different kind of text files
+                    if type_ == 'text':
+                        if name.endswith('.html') or subtype == 'html':
+                            subtype = 'html'
+                            # what types of text files to expand
+                            a = '<section id="{}">{}</section>'.format(name, open(full_path).read())
+                        elif subtype in CODE_TYPES or name.endswith('.txt'):
+                            # if the plain text is code,
+                            # which types do we wrap in pre-tags?
+                            a = "<div>" + open(full_path).read() + "</div>"
+                        elif subtype == 'markdown' or name.endswith('.md'):
+                            a = "<div>" + markdown.markdown(open(full_path).read()) + "</div>"
+                            pass
+                        else:
+                            subtype = subtype + ' unkown-file'
+                            a = "<a href='{}'>{}</a>"
+                            # a = FILE_TYPES[type_]
+
+                    if type_ == 'image':
+                        print("directory:{}, name:{}".format(directory, name))
+
+                        lv = root.split("/")
+                        relative = lv[len(lv)-1]
+                        relative_path = "./{}/{}".format(relative, name)
+
+                        a = FILE_TYPES[type_].format(relative_path, caption)
+                        if args.thumbnail:
+                            a = thumbnail(relative_path, relative_path, args)
+                        if args.no_filenames:
+                            caption = ""
+                        if args.captions:
+                            caption = caption(relative_path)
+                            a = FILE_TYPES[type_].format(relative_path, caption)
+
+                if subtype in SUB_TYPES:
+                    a = SUB_TYPES[subtype]
+
+                if type_ not in FILE_TYPES and subtype not in SUB_TYPES:
+                    # catch exceptions not yet defined in FILE_TYPES or SUB_TYPES
+                    a = "<a href='{}'>{}</a>"
+                    if args.verbose:
+                        message = 'not in list of file types, adding as plain href: \n'
+                        print(type_, subtype, message, name)
+                        subtype = subtype + ' unkown-file'
+
+                a = a.replace('{}', name)
+                id = uuid.uuid1()
+                html.append(div(args, type_, subtype, a, name, id))
+    result = ""
+    for line in html:
+        result += line + "\n"
+    return result
+
+
 def distribusify(args, directory, freg):  # noqa
     for root, dirs, files in os.walk(directory):
 
@@ -208,14 +284,14 @@ def distribusify(args, directory, freg):  # noqa
                     html.append('<a href="../">../</a>')
 
             for name in dirs:
-                '''
-                if args.menu_with_index:
-                    a = "<a href='{}/index.html'>{}</a>".replace('{}', name)
-                else:
-                    a = "<a href='{}'>{}/</a>".replace('{}', name)
-
-                html.insert(0, div(args, 'dir', 'dir', a, 'folder'))
-                '''
+                print(root)
+                if len(path) == 3 and artist:
+                    print(artist)
+                    # dirs 내부의 콘텐츠를 렌더링해 가져와야 함
+                    id = freg.get_index(artist, name)
+                    rd = render_dir(args, "{}/{}".format(root, name))
+                    h = '<div id="{}">\n{}</div>'.format(id, rd)
+                    html.append(h)
 
             if not directory == root:
                 index = os.path.join(root, 'index.html')

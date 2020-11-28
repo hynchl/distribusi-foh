@@ -186,7 +186,7 @@ class Fragments:
     '''
 
     def save(self):
-        print(json.dumps(self.indextable, cls=CustomEncoder))
+        #print(json.dumps(self.indextable, cls=CustomEncoder))
         with open(self.index_path, 'w') as outfile:
             json.dump(self.indextable, outfile, indent=4, cls=CustomEncoder)
         self.count = len(self.indextable)
