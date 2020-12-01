@@ -11,11 +11,6 @@
     
     let path = (window.location.pathname).split('/')[1];
     let participant = findElementByProperty(introductions, 'path', path);
-    console.log(path)
-    console.log(participant)
-    // IMAGE
-    // NAME
-    // 
     document.getElementById("introduction").innerHTML = participant.introduction;
     
     let p_frag = document.createElement("img");
