@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 html_head = """
 <!DOCTYPE html>
 <html lang="en">

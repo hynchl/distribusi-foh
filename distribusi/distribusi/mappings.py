@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 CODE_TYPES = ['x-c', 'x-shellscript', 'x-python']
 
 FILE_TYPES = {
