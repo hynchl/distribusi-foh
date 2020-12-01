@@ -20,6 +20,7 @@
       div.image                       {background-color:magenta}
       div.pdf object                  {background-color:mediumaquamarine}
       div.x-empty                     {background-color:mediumseagreen} 
+      div#archive_exit                {background-color: rgba(123, 60, 99, 0.9)};
       */
      
 
@@ -56,6 +57,12 @@
 
       .focus {
         animation: rainbowLinkText 3s;
+      }
+
+      a.anchor {
+        display: block;
+        position: relative;
+        visibility: hidden;
       }
 
       a:hover text, a:focus text, a:active text { animation-duration: 1s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
@@ -160,7 +167,6 @@
 
       div#archive_exit {
         top:0px;
-        background-color: rgba(123, 60, 99, 0.9);
         z-index: 99;
         position: fixed;
         width: 100%;
@@ -205,7 +211,9 @@
       img#icon_archive_more {width: 16px;}
 
 
-      
+      a.anchor {
+        top: -50px;
+      }
       
       /***** pc *****/
       @media ( min-width: 780px ) {
@@ -300,6 +308,7 @@
           z-index: 10;
           left: 100px;
           height: calc(100% - 200px);
+          overflow-y: scroll;
         }
 
         div#fragment_wrapper {
@@ -362,6 +371,10 @@
         div.png, div.jpeg {
           /* max-height:200px;
           max-width: 1000px; */
+        }
+
+        a.anchor {
+          top: -200px;
         }
 
       }
