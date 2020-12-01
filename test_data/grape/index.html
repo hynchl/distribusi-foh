@@ -47,26 +47,26 @@
     </div>
     <div id="introduction">
     </div>
+  </div>
 
-    <div id="archive">
-      <button id="archive_button">ARCHIVE
-        <img id="icon_archive_more" src="/src/img/icon_timeline.svg" alt="">
-      </button>
-      <div id="archive_list">
-        <a href="#">조각#1234</a>
-      </div>
+  <div id="archive_exit" style="display:none;"></div>
+  <div id="archive">
+    <button id="archive_button">ARCHIVE
+      <!-- <img id="icon_archive_more" src="src/img/icon_timeline.svg" alt=""> -->
+    </button>
+    <div id="archive_list">
     </div>
   </div>
 
   <div id="contents">
     <div id="frags">
-<div id="-1" class="octet-stream"><a href='.DS_Store'>.DS_Store</a><span class="filename">.DS_Store</span></div>
-<div id="0007" class="png"><figure><img class="image" src="IMG_1334.png"><figcaption>IMG_1334.png</figcaption></figure></div>
-<div id="0005" class="jpeg"><figure><img class="image" src="IMG_1340.jpg"><figcaption>IMG_1340.jpg</figcaption></figure></div>
-<div id="0006" class="png"><figure><img class="image" src="IMG_1690.png"><figcaption>IMG_1690.png</figcaption></figure></div>
-<div id="0004" class="png"><figure><img class="image" src="IMG_1693.png"><figcaption>IMG_1693.png</figcaption></figure></div>
-<div id="0020" class="jpeg"><figure><img class="image" src="fbdbdbf54d766dd86e5964de01ddc16b.jpg"><figcaption>fbdbdbf54d766dd86e5964de01ddc16b.jpg</figcaption></figure></div>
-<div id="0008" class="pdf"><object data="sample.pdf" class="pdf" type="application/pdf"><embed src="sample.pdf" type="application/pdf" /></object><span class="filename">sample.pdf</span></div>
+<div class="octet-stream"><a class="anchor" id="-1"></a><a href='.DS_Store'>.DS_Store</a><span class="filename">.DS_Store</span><span class="fid">#-1</span></div>
+<div class="png"><a class="anchor" id="0007"></a><figure><img class="image" src="IMG_1334.png"><figcaption>IMG_1334.png</figcaption></figure><span class="fid">#0007</span></div>
+<div class="jpeg"><a class="anchor" id="0005"></a><figure><img class="image" src="IMG_1340.jpg"><figcaption>IMG_1340.jpg</figcaption></figure><span class="fid">#0005</span></div>
+<div class="png"><a class="anchor" id="0006"></a><figure><img class="image" src="IMG_1690.png"><figcaption>IMG_1690.png</figcaption></figure><span class="fid">#0006</span></div>
+<div class="png"><a class="anchor" id="0004"></a><figure><img class="image" src="IMG_1693.png"><figcaption>IMG_1693.png</figcaption></figure><span class="fid">#0004</span></div>
+<div class="jpeg"><a class="anchor" id="0020"></a><figure><img class="image" src="fbdbdbf54d766dd86e5964de01ddc16b.jpg"><figcaption>fbdbdbf54d766dd86e5964de01ddc16b.jpg</figcaption></figure><span class="fid">#0020</span></div>
+<div class="pdf"><a class="anchor" id="0008"></a><object data="sample.pdf" class="pdf" type="application/pdf"><embed src="sample.pdf" type="application/pdf" /></object><span class="filename">sample.pdf</span><span class="fid">#0008</span></div>
 <a href="../">../</a>
 
     </div>
@@ -75,5 +75,6 @@
 <script src="/src/scripts/updateIntroduction.js"></script>
 <script src="/src/scripts/updateArchive.js"></script>
 <script src="/src/scripts/hashEvent.js"></script>
+<script src="/src/scripts/mobileArchiveEvent.js"></script>
 </body>
 </html>
