@@ -307,7 +307,7 @@ def distribusify(args, directory, freg):  # noqa
                     fid = freg.get_index(artist, name)
                     rd = render_dir(args, "{}/{}".format(root, name))
                     # h = '<div id="{}">\n{}</div>'
-                    h = '<div class="folder"><a class="anchor" id="{}"></a>\n{}<span class="fid">{}</span></div>'.format(fid, rd, fid)
+                    h = '<div class="folder"><a class="anchor" id="{}"></a>\n{}<span class="fid">#{}</span></div>'.format(fid, rd, fid)
                     html.append(h)
 
             if not directory == root:
