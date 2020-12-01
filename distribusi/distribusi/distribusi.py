@@ -62,21 +62,36 @@ def thumbnail(image, name, args):
         return "<figure><a href='{}'><img src='{}'></a><figcaption>{}</figcaption></figure>".format(name, name, name)
 
 
-def div(args, type_, subtype, tag, name, id):
+def div(args, type_, subtype, tag, name, fid):
+    '''
+    fid: fragment_id
+    '''
     if args.no_filenames:
         filename = ''
     else:
         filename = '<span class="filename">{}</span>'.format(name)
 
-    if 'image' in type_:
-        html = '<div class="{}"><a class="anchor" id="{}"></a>{}<span class="fid">#{}</span></div>'
-    elif 'pdf' in subtype:
-        html = '<div class="{}"><a class="anchor" id="{}"></a>{}' + filename + '<span class="fid">#{}</span></div>'
-    elif 'dir' in type_ or 'html' in subtype or 'unkown-file' in subtype:
-        html = '<div class="{}"><a class="anchor" id="{}"></a>{}<span class="fid">{}</span></div>'
+    if len(str(fid)) >= 36: # detect if fid is uuid
+        if 'image' in type_:
+            html = '<div class="{}">{}</div>'
+        elif 'pdf' in subtype:
+            html = '<div class="{}">{}' + filename + '</div>'
+        elif 'dir' in type_ or 'html' in subtype or 'unkown-file' in subtype:
+            html = '<div class="{}">{}</div>'
+        else:
+            html = '<div class="{}">{}' + filename + '</div>'
+        html = html.format(subtype, tag)
     else:
-        html = '<div class="{}"><a class="anchor" id="{}"></a>{}' + filename + '<span class="fid">#{}</span></div>'
-    return html.format(subtype, id, tag, id)
+        if 'image' in type_:
+            html = '<div class="{}"><a class="anchor" id="{}"></a>{}<span class="fid">#{}</span></div>'
+        elif 'pdf' in subtype:
+            html = '<div class="{}"><a class="anchor" id="{}"></a>{}' + filename + '<span class="fid">#{}</span></div>'
+        elif 'dir' in type_ or 'html' in subtype or 'unkown-file' in subtype:
+            html = '<div class="{}"><a class="anchor" id="{}"></a>{}<span class="fid">{}</span></div>'
+        else:
+                html = '<div class="{}"><a class="anchor" id="{}"></a>{}' + filename + '<span class="fid">#{}</span></div>'
+        html = html.format(subtype, fid, tag, fid)
+    return html
 
 
 def check_distribusi_index(args, index):
@@ -274,8 +289,8 @@ def distribusify(args, directory, freg):  # noqa
 
                     a = a.replace('{}', name)
                     if len(path) == 3 and artist:
-                        id = freg.get_index(artist, name)
-                        html.append(div(args, type_, subtype, a, name, id))
+                        fid = freg.get_index(artist, name)
+                        html.append(div(args, type_, subtype, a, name, fid))
 
 
             if root != directory:
@@ -289,9 +304,10 @@ def distribusify(args, directory, freg):  # noqa
                 if len(path) == 3 and artist:
                     print(artist)
                     # dirs 내부의 콘텐츠를 렌더링해 가져와야 함
-                    id = freg.get_index(artist, name)
+                    fid = freg.get_index(artist, name)
                     rd = render_dir(args, "{}/{}".format(root, name))
-                    h = '<div id="{}">\n{}</div>'.format(id, rd)
+                    # h = '<div id="{}">\n{}</div>'
+                    h = '<div class="folder"><a class="anchor" id="{}"></a>\n{}<span class="fid">{}</span></div>'.format(fid, rd, fid)
                     html.append(h)
 
             if not directory == root:
