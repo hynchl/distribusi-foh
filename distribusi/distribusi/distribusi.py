@@ -67,14 +67,14 @@ def div(args, type_, subtype, tag, name, id):
         filename = '<span class="filename">{}</span>'.format(name)
 
     if 'image' in type_:
-        html = '<div id="{}" class="{}">{}</div>'
+        html = '<div class="{}"><a class="anchor" id="{}"></a>{}<span class="fid">#{}</span></div>'
     elif 'pdf' in subtype:
-        html = '<div id="{}" class="{}">{}' + filename + '</div>'
+        html = '<div class="{}"><a class="anchor" id="{}"></a>{}' + filename + '<span class="fid">#{}</span></div>'
     elif 'dir' in type_ or 'html' in subtype or 'unkown-file' in subtype:
-        html = '<div id="{}" class="{}">{}</div>'
+        html = '<div class="{}"><a class="anchor" id="{}"></a>{}<span class="fid">{}</span></div>'
     else:
-        html = '<div id="{}" class="{}">{}' + filename + '</div>'
-    return html.format(id, subtype, tag)
+        html = '<div class="{}"><a class="anchor" id="{}"></a>{}' + filename + '<span class="fid">#{}</span></div>'
+    return html.format(subtype, id, tag, id)
 
 
 def check_distribusi_index(args, index):
