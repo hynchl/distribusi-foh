@@ -2,8 +2,9 @@ const SCALAR = 1;
 const THRESHOLD = 0;
 const INIT_DURATION = 300;
 const INIT_RATIO = 0.9;
-let maxY = 0;
 
+
+// set-up engine
 var Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
@@ -22,12 +23,12 @@ var render = Render.create({
                     wireframes: false,
                 }
              });
-              
 var ceiling = Bodies.rectangle(render.canvas.width/2, 0, render.canvas.width, 120, { isStatic: true, friction:0, restitution:10});
 var leftWall = Bodies.rectangle(0, window.innerHeight/2, 5, window.innerHeight, { isStatic: true, friction:0, restitution:10});
 var rightWall = Bodies.rectangle(render.canvas.width, window.innerHeight/2, 5, window.innerHeight, { isStatic: true, friction:0, restitution:10}); //update
 var floor = Bodies.rectangle(render.canvas.width/2, window.innerHeight, render.canvas.width, 240, { isStatic: true, friction:0, restitution:10});
 
+let maxY = 0;
 
 // Get SVG
 var sampleSVG = document.getElementsByClassName("shape");
@@ -45,7 +46,7 @@ for(let i = 0; i < sampleSVG.length; i++) {
         strokeStyle: color
       },
       position: {
-        x: window.innerWidth/2 + (Math.random() - 0.5) * window.innerWidth*0.25,
+        x: render.canvas.width/2 + (Math.random() - 0.5) * render.canvas.width*0.8 - 50,
         y: initY//window.innerHeight/2 + (Math.random() - 0.4) * window.innerHeight*0.5
       },
       mass: Math.random(),
@@ -54,7 +55,7 @@ for(let i = 0; i < sampleSVG.length; i++) {
       staticFriction:0,
       name: path.parentNode.id
     }, true);
-    initY = (window.innerWidth>960)?initY+10:initY+75;
+    initY += (window.innerWidth >= 960)?30:75;
     console.log(initY);
     let el = document.getElementById(path.parentNode.id)
     el.setAttribute("visibility", "hidden")
@@ -62,12 +63,12 @@ for(let i = 0; i < sampleSVG.length; i++) {
     frags.push(v);
   };
 
-  frags.sort((a,b)=>{return (a.position.y-b.position.y)})
-  engine.world.gravity = {scale: 0.0001, x: 0, y: 0}
-  World.add(engine.world, [ceiling, leftWall, rightWall]);
-  if(render.canvas.width>860) World.add(engine.world, floor)
-  Engine.run(engine);
-  Render.run(render);
+frags.sort((a,b)=>{return (a.position.y-b.position.y)})
+engine.world.gravity = {scale: 0.0001, x: 0, y: 0}
+World.add(engine.world, [ceiling, leftWall, rightWall]);
+if(render.canvas.width>860) World.add(engine.world, floor)
+Engine.run(engine);
+Render.run(render);
 
 
 // window.addEventListener("resize", ()=>{

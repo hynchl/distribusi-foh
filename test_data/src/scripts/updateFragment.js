@@ -20,7 +20,7 @@ const participants = [
     { "name":"양승욱", "path":"Seungwook_Yang", "fragId":"seungwookYang"},
     { "name":"배인숙", "path":"Insook_Bae", "fragId":"insookBae"},
     { "name":"빈곤사회연대", "path":"Korean_Peoples_Solidarity_Against_Poverty", "fragId":"kpsap"},
-    { "name":"신재", "path":"Jae Shin", "fragId":"jaeShin"},
+    { "name":"신재", "path":"Jae_Shin", "fragId":"jaeShin"},
     { "name":"돌고래", "path":"", "fragId":"hyunjin"},
     { "name":"이두호", "path":"doohoyi", "fragId":"doohoyi"},
     { "name":"송수연", "path":"Song_Soo", "fragId":"songSoo"},
@@ -43,6 +43,7 @@ const THRESHOLD = 0;
 const INIT_DURATION = 300;
 const INIT_RATIO = 0.9;
 
+// set-up engine
 var Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
@@ -51,7 +52,6 @@ var Engine = Matter.Engine,
     Common = Matter.Common,
     Svg = Matter.Svg,
     Vertices = Matter.Vertices;
-
 var engine = Engine.create();
 var render = Render.create({
                 element: document.body,
@@ -62,7 +62,6 @@ var render = Render.create({
                     wireframes: false,
                 }
              });
-
 var ceiling = Bodies.rectangle(render.canvas.width/2, 0, render.canvas.width, 120, { isStatic: true, friction:0, restitution:0.5 });
 var leftWall = Bodies.rectangle(0, window.innerHeight/2, 60, window.innerHeight, { isStatic: true, friction:0, restitution:0.5 });
 var rightWall = Bodies.rectangle(render.canvas.width, window.innerHeight/2, 60, window.innerHeight, { isStatic: true, friction:0, restitution:0.5 }); //update
@@ -158,33 +157,36 @@ setInterval(()=>{
         count -= 1;    
     }
     scrollChanged = false;
-}, 30);
+}, 60);
 
 
 setInterval(()=>{
-    // update fragment position
-    for(let i = 0; i < frag_disp.length; i++) {
-        frag_disp[i].angle = 0; // lock rotation
-        // if((frag_disp[i].velocity.x > THRESHOLD) || (frag_disp[i].velocity.y > THRESHOLD)){
-            let el = document.getElementById(`${frag_disp[i].name}`);
-            let x = frag_disp[i].bounds.min.x * SCALAR
-            let y = frag_disp[i].bounds.min.y * SCALAR
-            el.setAttribute('transform', "translate("+x+","+y+")");
-        // }
-    }
-
-    let bodies = engine.world.bodies.filter(body => body.label === "Body");
-    maxY = bodies.sort((a, b) => (b.position.y - a.position.y))[0].position.y;
-    // if (maxY > getDocumentHeight()) return;
-
-
-    // expand the height
-    render.canvas.height = Math.max(window.innerHeight, maxY);
-    document.querySelector('#frags').style.height = render.canvas.height + 200;
-    if(leftWall.position.y+window.innerHeight/2 <getDocumentHeight()){
-        leftWall = Bodies.rectangle(0, leftWall.position.y + render.canvas.width, 60, window.innerHeight, { isStatic: true });
-        rightWall = Bodies.rectangle(render.canvas.width, rightWall.position.y + window.innerHeight, 60, window.innerHeight, { isStatic: true }); //update
-        World.add(engine.world, [leftWall, rightWall]);
+    try{
+        // update fragment position
+        for(let i = 0; i < frag_disp.length; i++) {
+            frag_disp[i].angle = 0; // lock rotation
+            // if((frag_disp[i].velocity.x > THRESHOLD) || (frag_disp[i].velocity.y > THRESHOLD)){
+                let el = document.getElementById(`${frag_disp[i].name}`);
+                let x = frag_disp[i].bounds.min.x * SCALAR
+                let y = frag_disp[i].bounds.min.y * SCALAR
+                el.setAttribute('transform', "translate("+x+","+y+")");
+                // }
+            }
+            
+            let bodies = engine.world.bodies.filter(body => body.label === "Body");
+            maxY = bodies.sort((a, b) => (b.position.y - a.position.y))[0].position.y;
+            // if (maxY > getDocumentHeight()) return;
+            
+            // expand the height
+            render.canvas.height = Math.max(window.innerHeight, maxY);
+            document.querySelector('#frags').style.height = render.canvas.height + 200;
+            if(leftWall.position.y+window.innerHeight/2 <getDocumentHeight()){
+                leftWall = Bodies.rectangle(0, leftWall.position.y + render.canvas.width, 60, window.innerHeight, { isStatic: true });
+                rightWall = Bodies.rectangle(render.canvas.width, rightWall.position.y + window.innerHeight, 60, window.innerHeight, { isStatic: true }); //update
+                World.add(engine.world, [leftWall, rightWall]);
+            }
+    }catch(e){
+        //
     }
   }, 15)
 
