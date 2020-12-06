@@ -56,7 +56,7 @@ for(let i = 0; i < sampleSVG.length; i++) {
       name: path.parentNode.id
     }, true);
     initY += (window.innerWidth >= 960)?30:75;
-    console.log(initY);
+    // console.log(initY);
     let el = document.getElementById(path.parentNode.id)
     el.setAttribute("visibility", "hidden")
 
@@ -92,13 +92,13 @@ let addFrags = ()=>{
     World.add(engine.world, frags[count]);
     count += 1;
     duration *= INIT_RATIO;
-    // addFrags();
-    setTimeout(addFrags, 50);
+    setTimeout(addFrags, 15);
   }
 }
 addFrags();
 
 setInterval(()=>{
+
   for(let i = 0; i < frags.length; i++) {
     frags[i].angle = 0; // lock rotation
     let el = document.getElementById(frags[i].name);
@@ -109,9 +109,9 @@ setInterval(()=>{
 
   let bodies = engine.world.bodies.filter(body => body.label === "Body");
   maxY = bodies.sort((a, b) => (b.position.y - a.position.y))[0].position.y;
-  if (maxY > getDocumentHeight()) return;
+  if (maxY < getDocumentHeight()) return;
 
-  render.canvas.height = Math.max(window.innerHeight, maxY + 100);
+  render.canvas.height = Math.max(window.innerHeight, maxY + 200);
   document.querySelector('#authors').style.height = render.canvas.height;
   
   if(leftWall.position.y+window.innerHeight/2 <getDocumentHeight()){
@@ -127,6 +127,7 @@ setInterval(()=>{
 function getScrollTop() {
   return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
 }
+
 // 문서의 높이를 구하는 함수
 function getDocumentHeight() {
   const body = document.body;
