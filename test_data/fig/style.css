@@ -1,1 +1,18 @@
-.fid { font-size: 20pt }
+@font-face {
+    font-family: 'SLEI Gothic TTF';
+    src: url('SLEIGothicTTF.eot');
+    src: url('SLEIGothicTTF.eot?#iefix') format('embedded-opentype'),
+        url('SLEIGothicTTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+.fid { 
+	font-size: 24pt;
+	font-family: 'SLEI Gothic TTF'; 
+	font-weight: normal; 
+	font-style: normal;
+	margin-top: 10px;
+}
