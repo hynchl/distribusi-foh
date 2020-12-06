@@ -87,7 +87,7 @@ def div(args, type_, subtype, tag, name, fid):
         elif 'pdf' in subtype:
             html = '<div class="{}"><a class="anchor" id="{}"></a>{}' + filename + '<span class="fid">#{}</span></div>'
         elif 'dir' in type_ or 'html' in subtype or 'unkown-file' in subtype:
-            html = '<div class="{}"><a class="anchor" id="{}"></a>{}<span class="fid">{}</span></div>'
+            html = '<div class="{}"><a class="anchor" id="{}"></a>{}<span class="fid">#{}</span></div>'
         else:
                 html = '<div class="{}"><a class="anchor" id="{}"></a>{}' + filename + '<span class="fid">#{}</span></div>'
         html = html.format(subtype, fid, tag, fid)
