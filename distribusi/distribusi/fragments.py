@@ -3,7 +3,7 @@ import os
 import platform
 import json
 from operator import itemgetter
-
+from distribusi.ignore import Ignore
 
 class Fragment:
     def __init__(self, index, update, directory, artist, file):
@@ -23,9 +23,8 @@ class Fragments:
         self.index = {}
         self.indextable = []
         self.timetable = []
-        self.ignore = ['.ignore']
+        self.ignore = Ignore()
 
-        self.ignore_file = '.ignore'
         self.index_file = 'index.json'
 
     def init_json(self, directory):
@@ -37,14 +36,6 @@ class Fragments:
         self.temp_data = {"fragments":[]}
         self.count = len(self.json_data)
 
-    def add_ignore(self, directory):
-        ignore_path = os.path.join(directory, self.ignore_file)
-        if os.path.isfile(ignore_path):
-            ignore = open(ignore_path, 'r')
-            ignore_lines = ignore.readlines()
-            for line in ignore_lines:
-                stripped_line = line.rstrip()
-                self.ignore.append(stripped_line)
 
     def creation_date(self, path_to_file):
         """
@@ -97,11 +88,11 @@ class Fragments:
     def preindex(self, directory):
         self.init_json(directory)
         for root, dirs, files in os.walk(directory):
-            self.add_ignore(root)
+            self.ignore.add(root)
 
             arr = root.split("/")
 
-            if arr[2] in self.ignore:
+            if self.ignore.test(arr[2]):
                 pass # ignore 폴더 처리
             else:
                 # 2뎁스까지만 인덱스 함.
@@ -110,7 +101,7 @@ class Fragments:
                     for f in files:
                         if self.is_meta(f):
                             pass
-                        elif f in self.ignore:
+                        elif self.ignore.test(f):
                             pass
                         elif self.has_meta(root, f):
                             self.occupancy(root, f)
@@ -121,7 +112,7 @@ class Fragments:
                     for d in dirs:
                         if self.has_meta(root, d):
                             self.occupancy(root, d)
-                        elif d in self.ignore:
+                        elif self.ignore.test(d):
                             pass
                         else:
                             self.add_timetable(root, d)

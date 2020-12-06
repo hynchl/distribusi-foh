@@ -2,7 +2,7 @@
     {
         "__Fragment__": {
             "index": 0,
-            "update": 1605624006.157665,
+            "update": 1607256782.1336884,
             "directory": "./test_data/event_lecture",
             "artist": "event_lecture",
             "file": "event_0000"
@@ -11,7 +11,7 @@
     {
         "__Fragment__": {
             "index": 1,
-            "update": 1605624006.16457,
+            "update": 1607256782.1344724,
             "directory": "./test_data/event_lecture",
             "artist": "event_lecture",
             "file": "event_0001"
@@ -20,70 +20,16 @@
     {
         "__Fragment__": {
             "index": 2,
-            "update": 1503837516.0,
+            "update": 1607256782.1055331,
             "directory": "./test_data/carrot",
             "artist": "carrot",
-            "file": "\u110c\u1175\u11af\u110c\u116e.mp4"
+            "file": "1030.txt"
         }
     },
     {
         "__Fragment__": {
             "index": 3,
-            "update": 1567569419.653444,
-            "directory": "./test_data/carrot",
-            "artist": "carrot",
-            "file": "\u1101\u116e\u1106\u116e\u11af\u1101\u116e\u1106\u116e\u11af.mov"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 4,
-            "update": 1603737283.2655902,
-            "directory": "./test_data/grape",
-            "artist": "grape",
-            "file": "IMG_1693.png"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 5,
-            "update": 1603737296.0838926,
-            "directory": "./test_data/grape",
-            "artist": "grape",
-            "file": "IMG_1340.jpg"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 6,
-            "update": 1603737307.8227732,
-            "directory": "./test_data/grape",
-            "artist": "grape",
-            "file": "IMG_1690.png"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 7,
-            "update": 1603737326.0093782,
-            "directory": "./test_data/grape",
-            "artist": "grape",
-            "file": "IMG_1334.png"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 8,
-            "update": 1603737524.8806562,
-            "directory": "./test_data/grape",
-            "artist": "grape",
-            "file": "sample.pdf"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 9,
-            "update": 1604243002.5126157,
+            "update": 1607256782.1057456,
             "directory": "./test_data/carrot",
             "artist": "carrot",
             "file": "RTF\ud14c\uc2a4\ud2b8.rtf"
@@ -91,8 +37,8 @@
     },
     {
         "__Fragment__": {
-            "index": 10,
-            "update": 1604247403.2948427,
+            "index": 4,
+            "update": 1607256782.1060278,
             "directory": "./test_data/carrot",
             "artist": "carrot",
             "file": "md\uc4f0\uae30.md"
@@ -100,44 +46,8 @@
     },
     {
         "__Fragment__": {
-            "index": 11,
-            "update": 1604247403.2950983,
-            "directory": "./test_data/carrot",
-            "artist": "carrot",
-            "file": "txt\uc4f0\uae30.txt"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 12,
-            "update": 1604851924.8719456,
-            "directory": "./test_data/fig",
-            "artist": "fig",
-            "file": "20201022"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 13,
-            "update": 1604851924.8802848,
-            "directory": "./test_data/fig",
-            "artist": "fig",
-            "file": "20201029"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 14,
-            "update": 1605496049.4042296,
-            "directory": "./test_data/",
-            "artist": "",
-            "file": "404.html"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 15,
-            "update": 1605496049.4053128,
+            "index": 5,
+            "update": 1607256782.1060853,
             "directory": "./test_data/carrot",
             "artist": "carrot",
             "file": "test002.txt"
@@ -145,8 +55,35 @@
     },
     {
         "__Fragment__": {
-            "index": 16,
-            "update": 1605496049.4058702,
+            "index": 6,
+            "update": 1607256782.1062121,
+            "directory": "./test_data/carrot",
+            "artist": "carrot",
+            "file": "txt\uc4f0\uae30.txt"
+        }
+    },
+    {
+        "__Fragment__": {
+            "index": 7,
+            "update": 1607256782.1183975,
+            "directory": "./test_data/carrot",
+            "artist": "carrot",
+            "file": "\uafb8\ubb3c\uafb8\ubb3c.mov"
+        }
+    },
+    {
+        "__Fragment__": {
+            "index": 8,
+            "update": 1607256782.1308887,
+            "directory": "./test_data/carrot",
+            "artist": "carrot",
+            "file": "\uc9c8\uc8fc.mp4"
+        }
+    },
+    {
+        "__Fragment__": {
+            "index": 9,
+            "update": 1607256782.1359093,
             "directory": "./test_data/fig",
             "artist": "fig",
             "file": "20201020"
@@ -154,8 +91,26 @@
     },
     {
         "__Fragment__": {
-            "index": 17,
-            "update": 1605496049.4062285,
+            "index": 10,
+            "update": 1607256782.144392,
+            "directory": "./test_data/fig",
+            "artist": "fig",
+            "file": "20201022"
+        }
+    },
+    {
+        "__Fragment__": {
+            "index": 11,
+            "update": 1607256782.1451015,
+            "directory": "./test_data/fig",
+            "artist": "fig",
+            "file": "20201029"
+        }
+    },
+    {
+        "__Fragment__": {
+            "index": 12,
+            "update": 1607256782.1454825,
             "directory": "./test_data/fig",
             "artist": "fig",
             "file": "fig002.txt"
@@ -163,8 +118,8 @@
     },
     {
         "__Fragment__": {
-            "index": 18,
-            "update": 1605496049.4064658,
+            "index": 13,
+            "update": 1607256782.1458695,
             "directory": "./test_data/fig",
             "artist": "fig",
             "file": "test.txt"
@@ -172,8 +127,8 @@
     },
     {
         "__Fragment__": {
-            "index": 19,
-            "update": 1605496049.406584,
+            "index": 14,
+            "update": 1607256782.1459706,
             "directory": "./test_data/fig",
             "artist": "fig",
             "file": "test001.txt"
@@ -181,8 +136,53 @@
     },
     {
         "__Fragment__": {
+            "index": 15,
+            "update": 1607256782.1462324,
+            "directory": "./test_data/",
+            "artist": "",
+            "file": "fragment.html"
+        }
+    },
+    {
+        "__Fragment__": {
+            "index": 16,
+            "update": 1607256782.2283018,
+            "directory": "./test_data/grape",
+            "artist": "grape",
+            "file": "IMG_1334.png"
+        }
+    },
+    {
+        "__Fragment__": {
+            "index": 17,
+            "update": 1607256782.2359385,
+            "directory": "./test_data/grape",
+            "artist": "grape",
+            "file": "IMG_1340.jpg"
+        }
+    },
+    {
+        "__Fragment__": {
+            "index": 18,
+            "update": 1607256782.2999306,
+            "directory": "./test_data/grape",
+            "artist": "grape",
+            "file": "IMG_1690.png"
+        }
+    },
+    {
+        "__Fragment__": {
+            "index": 19,
+            "update": 1607256782.3536453,
+            "directory": "./test_data/grape",
+            "artist": "grape",
+            "file": "IMG_1693.png"
+        }
+    },
+    {
+        "__Fragment__": {
             "index": 20,
-            "update": 1605496049.407514,
+            "update": 1607256782.3545525,
             "directory": "./test_data/grape",
             "artist": "grape",
             "file": "fbdbdbf54d766dd86e5964de01ddc16b.jpg"
@@ -191,19 +191,10 @@
     {
         "__Fragment__": {
             "index": 21,
-            "update": 1606474058.2468154,
-            "directory": "./test_data/carrot",
-            "artist": "carrot",
-            "file": "1030.txt"
-        }
-    },
-    {
-        "__Fragment__": {
-            "index": 22,
-            "update": 1606499064.7076151,
-            "directory": "./test_data/",
-            "artist": "",
-            "file": "fragment.html"
+            "update": 1607256782.3548856,
+            "directory": "./test_data/grape",
+            "artist": "grape",
+            "file": "sample.pdf"
         }
     }
 ]

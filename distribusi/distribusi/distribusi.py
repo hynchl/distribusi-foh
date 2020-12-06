@@ -14,7 +14,7 @@ from distribusi.page_template import html_footer, html_head
 from distribusi.mappings import CODE_TYPES, FILE_TYPES, SUB_TYPES
 from distribusi import fragments
 import uuid
-
+from distribusi.ignore import Ignore
 
 MIME_TYPE = magic.Magic(mime=True)
 
@@ -205,7 +205,11 @@ def render_dir(args, directory):
 
 
 def distribusify(args, directory, freg):  # noqa
+
+    ignore = Ignore()
+
     for root, dirs, files in os.walk(directory):
+        ignore.add(root)
 
         if args.exclude_directory:
             if args.verbose:
@@ -234,7 +238,9 @@ def distribusify(args, directory, freg):  # noqa
                 print('Generating directory listing for', root)
 
             for name in sorted(files):
-                if 'index.html' not in name:
+                if ignore.test(name):
+                    pass
+                elif 'index.html' not in name:
                     full_path = os.path.join(root, name)
                     mime = MIME_TYPE.from_file(full_path)
                     # example: MIME plain/text becomes 'type' plain 'subtype' text
@@ -300,8 +306,9 @@ def distribusify(args, directory, freg):  # noqa
                     html.append('<a href="../">../</a>')
 
             for name in dirs:
-                print(root)
-                if len(path) == 3 and artist:
+                if ignore.test(name):
+                    pass
+                elif len(path) == 3 and artist:
                     print(artist)
                     # dirs 내부의 콘텐츠를 렌더링해 가져와야 함
                     fid = freg.get_index(artist, name)
@@ -328,19 +335,3 @@ def distribusify(args, directory, freg):  # noqa
                         os.remove(index)
                 except Exception as e:
                     print(e)
-
-def build_index(args, directory, freg):
-    #
-    # fragments index
-    # 임시 데이터 저장
-    #
-    print("--------- Build main index --------------")
-    html = []
-    freg_data = freg.get_fragments()
-    for f in freg_data:
-        index = "{}".format(f.index)
-        url = "/{}/#{} ".format(f.artist, index.zfill(4))
-        label = "{} 번째 조각".format(f.index)
-        html.append('<a href="{}">{}</a><br/>'.format(url, label))
-    index = os.path.join(directory, 'index.html')
-    write_index(args, index, html, html_head, html_footer)
