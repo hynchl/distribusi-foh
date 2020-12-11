@@ -39,19 +39,24 @@ def thumbnail(image, name, args):
     try:
         size = (450, 450)
         im = Image.open(image)
+        exif = None
+        try:
+            for orientation in ExifTags.TAGS.keys():
+                if ExifTags.TAGS[orientation] == 'Orientation':
+                    break
+            exif = im._getexif()
+        except (AttributeError, KeyError, IndexError):
+            pass
 
-        for orientation in ExifTags.TAGS.keys():
-            if ExifTags.TAGS[orientation] == 'Orientation':
-                break
-        exif = im._getexif()
         im.thumbnail(size)
 
-        if exif[orientation] == 3:
-            im = im.rotate(180, expand=True)
-        elif exif[orientation] == 6:
-            im = im.rotate(270, expand=True)
-        elif exif[orientation] == 8:
-            im = im.rotate(90, expand=True)
+        if exif is not None:
+            if exif[orientation] == 3:
+                im = im.rotate(180, expand=True)
+            elif exif[orientation] == 6:
+                im = im.rotate(270, expand=True)
+            elif exif[orientation] == 8:
+                im = im.rotate(90, expand=True)
         
         if (im.mode == 'RGBA'):
             bg = Image.new('RGBA', im.size, (255,255,255))
