@@ -151,9 +151,6 @@ def render_dir(args, directory):
                     print('Found file in dir ', name, 'as', mime)
 
                 if type_ in FILE_TYPES:
-
-
-
                     a = FILE_TYPES[type_].format(relative_path, caption)
 
                     # expansion for different kind of text files
@@ -177,7 +174,7 @@ def render_dir(args, directory):
                     if type_ == 'image':
                         a = FILE_TYPES[type_].format(relative_path, caption)
                         if args.thumbnail:
-                            a = thumbnail(relative_path, relative_path, args)
+                            a = thumbnail(full_path, relative_path, args)
                         if args.no_filenames:
                             caption = ""
                         if args.captions:
