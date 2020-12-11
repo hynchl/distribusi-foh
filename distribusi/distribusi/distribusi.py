@@ -7,7 +7,7 @@ import subprocess
 from io import BytesIO
 
 import magic
-from PIL import Image
+from PIL import Image, ExifTags
 import markdown
 
 from distribusi.page_template import html_footer, html_head
@@ -39,7 +39,19 @@ def thumbnail(image, name, args):
     try:
         size = (450, 450)
         im = Image.open(image)
+
+        for orientation in ExifTags.TAGS.keys():
+            if ExifTags.TAGS[orientation] == 'Orientation':
+                break
+        exif = im._getexif()
         im.thumbnail(size)
+
+        if exif[orientation] == 3:
+            im = im.rotate(180, expand=True)
+        elif exif[orientation] == 6:
+            im = im.rotate(270, expand=True)
+        elif exif[orientation] == 8:
+            im = im.rotate(90, expand=True)
         
         if (im.mode == 'RGBA'):
             bg = Image.new('RGBA', im.size, (255,255,255))
