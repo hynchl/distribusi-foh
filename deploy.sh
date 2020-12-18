@@ -35,5 +35,5 @@ rm data/index.html
 echo "---> 'cp test_data/index.html data/'"
 cp test_data/index.html data/
 
-echo "---> 'python distribusi/test.py -d ./data/'"
+echo "---> 'python distribusi/test.py -t -d ./data/'"
 python distribusi/test.py -t -d ./data/
