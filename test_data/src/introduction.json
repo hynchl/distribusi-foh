@@ -134,51 +134,39 @@
     },
     {
         "name":"돌고래",
-        "path":"",
-        "fragId":"",
+        "path":"Dolgoreh",
+        "fragId":"hyunjin",
         "introduction":"2011년 여름부터 사람들로부터 '돌고래'로 불리고 있는 생명체이다. 바다와 육지를 오가며 바다와 그곳에 사는 존재들이 처한 위기에 대해 알리고 있다. 그는 현재 제주 남방큰돌고래들의 주요서식처 곁에서 살아가고 있으며, 비인간존재들과의 공존을 위해 소를 먹지 않고 소가 먹는 것을 먹고있다. 그의 장래희망은 당신과 함께 '무해한 예술가'가 되는 것이다.<br/>Dolgoreh : Since the summer of 2011, this creature has been called 'Dolgoreh' by the people. They have been coming back and forth from the sea and land in order to tell the people about the crisis the sea life is facing. They now live near the main habitat of Jeju dolphins, and to coexist with non-human beings, they don't eat cow and rather eat what cows eat. Dolgoreh's future hope is to become a 'harmless artist' with you.<br/>('She'라는 표현 대신 무성별 3인칭 'They'를 사용했습니다.)"
     },
     {
         "name":"이두호",
         "path":"doohoyi",
         "fragId":"doohoyi",
-        "introduction":"안녕하세요"
+        "introduction":"페이스북을 끊고, 인스타그램을 조직적으로 사용해보려고 했으나, 결국은 전화도 잘 받지 않는 사람이 되어서, 가족들이 왜 전화를 받지 않느냐고 역정을 내자, ‘아니 세상이 언제부터 전화를 걸면 받아야 하는 것으로 되었냐고’ 더 크게 역정을 내고, 문을 걸어 잠그었다. 문제는 사실 탁구공처럼 주거니, 받거니. 그리고 팝콘 처럼 탁-탁-탁- 튀기고 터지고 다시 터트려지는 ‘화’라는 습관의 연쇄라는 사실이 올 해를 지나면서 보다 명확해져 가는 중이다."
     },
     {
         "name":"송수연",
         "path":"Song_Soo",
         "fragId":"songSoo",
-        "introduction":"안녕하세요"
+        "introduction":"어떤 가치와 질문은 계속 유효할 수 있는가?를 생각하고 있다. 시간이 지나고 경험치가 쌓이면서 다시 생각하는 것들이 많아졌다. 어떤 것은 성숙해졌고, 어떤 것에는 유연해졌으며 어떤 것들에는 예민해졌고, 또 다른 어떤 것에는 거리를 두고 있다. 지금은 스스로 잘할 수 있는 것, 부족한 것을 알아가며 예민하게 균형을 잡으려고 노력하고 있다."
     },
     {
         "name":"노들야학",
         "path":"nodl",
         "fragId":"nodl",
-        "introduction":"안녕하세요"
-    },
-    {
-        "name":"현진",
-        "path":"Dolgoreh",
-        "fragId":"hyunjin",
-        "introduction":"안녕하세요"
+        "introduction":"노들장애인야학은 교육의 기회에서 배제된 중증 장애인 70여 명이 밤낮으로 공부하는 교육공간이다. 오랫동안 시설이나, 집 안에서만 있었던 사람들이 지역사회에서 자립해 살아가기 위한 중간다리 역할을 하는 공간이다."
     },
     {
         "name":"정진호",
         "path":"Jinho_Jeong",
         "fragId":"jinhoJeong",
-        "introduction":"안녕하세요"
+        "introduction":"안녕하세요 정진호라고 합니다 동물과 신화 이외 국가의 역사 그리고 비드맨을 좋아하는 남자랍니다. 생물을 알아 공룡이나 동물들을 알고 신화를 알고 환수나 신 악마 천사를 안다는 것은 기쁘지 않으신가요?? 여러모로 제가 제 세계관을 구상하기 위해 시작하게 된 노력이랍니다. 겉으로는 이상해 보이는 망상도 굉장하게 보일 수 있다는 것이죠. 그만큼 사람은 깊게 생각하는 습관이 필요하다는 것이에요. 제 하이퍼 비드맨 유니버스라는 세계관은 그 결과 중 하나랍니다. 일부 설정을 들어 보실래요?? 제 세계관에는 우리가 아는 신과 천사 악마 외 에도 창조신이라는 가공할 만한 존재들이 있답니다."
     },
     {
         "name":"홍서연",
         "path":"Hong_Seo_Yeon",
         "fragId":"hongSeoYeon",
-        "introduction":"안녕하세요"
-    },
-    {
-        "name":"",
-        "path":"",
-        "fragId":"pzzz",
-        "introduction":""       
+        "introduction":"문명사와 문화인류학을 강의한다. 신체의 기술, 생활의 기술, 표현의 기술을 넘나드는 인간의 활동을 주제로, 그리고 나눔을 주제로 연구하고 있다."
     },
     {
         "name":"포도",
