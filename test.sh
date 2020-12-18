@@ -16,4 +16,4 @@
 #   --no-hidden           Exclude hidden directories
 #   --menu-with-index     Append index.html to menu items to aid navigation
 
-python distribusi/test.py -d ./data/
+python distribusi/test.py -t -d ./data/
