@@ -70,7 +70,7 @@
       @keyframes rainbowLinkText {0% {color: #ff2a2a;} 15% {color: #ff7a2a;} 30% {color: #ffc52a; }45% {color: #43ff2a; }60% {color: #2a89ff; }75% {color: #202082; }90% {color: #6b2aff; } 100% {color: #e82aff; }}
 
 
-      figure img { max-width: 450px; }
+
 
       /***** mobile *****/
 
@@ -209,6 +209,7 @@
         background:#fff;
         border:1px solid;
         height: 40px;
+        padding: 0px;
       }
 
       img#icon_archive_more {width: 16px;}
@@ -403,6 +404,10 @@
         img#icon_fb, img#icon_ig { height: 50px; margin-right:20px;}
 
 
+        div#frags>div {
+          margin-right:30px;
+          width: 480px;
+        }
       }
 
 
@@ -412,8 +417,6 @@
         margin-bottom: 30px;
         padding-top: 50px;
         display: inline-block;
-        margin-right:30px;
-        /* border-top: solid 1px #000; */
         vertical-align: top;
         padding:20px;
       }
@@ -426,17 +429,17 @@
         font-style: italic;
       }
     
-
-
-      .image{width:80%; max-width: 600px;}
-      .pdf object{width:100%;height: 600px;}
-      .x-empty, .plain, .rtf, .unkown-file, .quicktime, video, .pdf{width:80%; max-width: 600px;}
+      .image{width:100%; max-width: calc(100vw - 80px)}
+      /* .pdf{width:100%; max-width: calc(100vw - 80px); height: 600px;}
+      .x-empty, .plain, .rtf, .unkown-file, .quicktime, video, .pdf{width:100%; max-width: calc(100vw - 80px)} */
+      video {width:100%; max-width: calc(100vw - 80px)}
       .dir::before{content:"📁 ";font-size:18px;}
       .filename{display:block;font-family:mono;}
       .unkown-file::before{content:"📄 ";font-size:18px;}
       /* div{max-width: 640px;display:inline-block;vertical-align:top;margin:1em;padding:1em;} */
-      video {width: 80%;max-width: 600px;}
-      
+      .pdf object{width:100%; height: 450px;}
+      .x-empty, .plain, .rtf, .unkown-file, .quicktime, video, .pdf{width:100%; max-width: calc(100vw - 80px);}
+
 
       @keyframes anim_tranparency {
         0% {
