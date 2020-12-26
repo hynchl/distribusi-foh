@@ -429,7 +429,7 @@
         font-style: italic;
       }
     
-      .image{width:100%; max-width: calc(100vw - 80px)}
+      figure img{width:100%; max-width: calc(100vw - 80px)}
       /* .pdf{width:100%; max-width: calc(100vw - 80px); height: 600px;}
       .x-empty, .plain, .rtf, .unkown-file, .quicktime, video, .pdf{width:100%; max-width: calc(100vw - 80px)} */
       video {width:100%; max-width: calc(100vw - 80px)}
