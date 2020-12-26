@@ -406,7 +406,7 @@
 
         div#frags>div {
           margin-right:30px;
-          width: 480px;
+          max-width: 450px;
         }
       }
 
@@ -437,7 +437,7 @@
       .filename{display:block;font-family:mono;}
       .unkown-file::before{content:"📄 ";font-size:18px;}
       /* div{max-width: 640px;display:inline-block;vertical-align:top;margin:1em;padding:1em;} */
-      .pdf object{width:100%; height: 450px;}
+      /* .pdf object{width:100%; height: 450px;} */
       .x-empty, .plain, .rtf, .unkown-file, .quicktime, video, .pdf{width:100%; max-width: calc(100vw - 80px);}
 
 
