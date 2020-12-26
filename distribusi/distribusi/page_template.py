@@ -3,6 +3,7 @@ html_head = """
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>환대의 조각들 Fragments of Hospitality</title>
     <!-- Generated with distribusi https://git.vvvvvvaria.org/varia/distribusi -->
     <meta name="generator" content="distribusi" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
@@ -18,7 +19,7 @@ html_head = """
 <div>
   <div id="menu">
     <div id="logo_wrapper" class="svg_wrapper">
-      <a href="/index.html">
+      <a href="/">
       <img id="logo_foh"src="/src/img/logo.svg" alt="환대의 조각 로고">
     </a>
     </div>
