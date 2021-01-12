@@ -2,7 +2,7 @@
 CODE_TYPES = ['x-c', 'x-shellscript', 'x-python']
 
 FILE_TYPES = {
-    'image': '<figure><img class="image" src="{}"><figcaption>{}</figcaption></figure>',
+    'image': '<figure><img class="image" src="{}" alt="{}" ><figcaption>{}</figcaption></figure>',
     'text': '<a href="{}" class="text">{}</a>',
     'video': ('<video controls>' '<source src="{}"></video>'),
     'audio': ('<audio controls class="audio">' '<source src="{}"></audio>'),

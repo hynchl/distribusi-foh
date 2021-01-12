@@ -18,6 +18,8 @@ from distribusi.ignore import Ignore
 
 MIME_TYPE = magic.Magic(mime=True)
 
+ignore = Ignore()
+
 
 def caption(image):
     try:
@@ -32,6 +34,7 @@ def caption(image):
     except Exception as e:
         caption = ''
         print(e)
+
     return caption
 
 
@@ -156,19 +159,21 @@ def render_dir(args, directory):
             relative = lv[len(lv) - 1]
             relative_path = "./{}/{}".format(relative, name)
 
-            if 'index.html' not in name:
+            if ignore.test(name):
+                pass
+            elif 'index.html' not in name:
                 full_path = os.path.join(root, name)
                 mime = MIME_TYPE.from_file(full_path)
                 # example: MIME plain/text becomes 'type' plain 'subtype' text
                 type_, subtype = mime.split('/')
 
-                caption = name
+                c = name
 
                 if args.verbose:
                     print('Found file in dir ', name, 'as', mime)
 
                 if type_ in FILE_TYPES:
-                    a = FILE_TYPES[type_].format(relative_path, caption)
+                    a = FILE_TYPES[type_].format(relative_path, c, c)
 
                     # expansion for different kind of text files
                     if type_ == 'text':
@@ -189,14 +194,25 @@ def render_dir(args, directory):
                             # a = FILE_TYPES[type_]
 
                     if type_ == 'image':
-                        a = FILE_TYPES[type_].format(relative_path, caption)
+                        a = FILE_TYPES[type_].format(relative_path, c, c)
                         if args.thumbnail:
                             a = thumbnail(full_path, relative_path, args)
                         if args.no_filenames:
-                            caption = ""
+                            c = ""
                         if args.captions:
-                            caption = caption(relative_path)
-                            a = FILE_TYPES[type_].format(relative_path, caption)
+                            c = caption(relative_path)
+                            a = FILE_TYPES[type_].format(relative_path, c, c)
+                        # ALT 처리
+                        alt_path = full_path + ".alt"
+                        if os.path.isfile(alt_path):
+                            f = open(alt_path, 'r', encoding='utf-8')
+                            alt = ''
+                            while True:
+                                line = f.readline()
+                                if not line: break
+                                alt = alt + line + ' '
+
+                            a = FILE_TYPES[type_].format(relative_path, alt, c)
 
                 if subtype in SUB_TYPES:
                     a = SUB_TYPES[subtype]
@@ -220,7 +236,7 @@ def render_dir(args, directory):
 
 def distribusify(args, directory, freg):  # noqa
 
-    ignore = Ignore()
+
 
     for root, dirs, files in os.walk(directory):
         ignore.add(root)
@@ -260,14 +276,14 @@ def distribusify(args, directory, freg):  # noqa
                     # example: MIME plain/text becomes 'type' plain 'subtype' text
                     type_, subtype = mime.split('/')
 
-                    caption = name
+                    c = name
 
                     if args.verbose:
                         print('Found', name, 'as', mime)
 
                     if type_ in FILE_TYPES:
                         
-                        a = FILE_TYPES[type_].format(name, caption)
+                        a = FILE_TYPES[type_].format(name, c, c)
 
                         # expansion for different kind of text files
                         if type_ == 'text':
@@ -291,10 +307,23 @@ def distribusify(args, directory, freg):  # noqa
                             if args.thumbnail:
                                 a = thumbnail(full_path, name, args)
                             if args.no_filenames:
-                                caption = ""
+                                c = ""
                             if args.captions:
-                                caption = caption(full_path)
-                                a = FILE_TYPES[type_].format(name, caption)
+                                c = caption(full_path)
+                                a = FILE_TYPES[type_].format(name, c, c)
+                            # ALT 처리
+                            alt_path = full_path + ".alt"
+                            if os.path.isfile(alt_path):
+                                f = open(alt_path, 'r', encoding='utf-8')
+                                alt = ''
+                                while True:
+                                    line = f.readline()
+                                    if not line: break
+                                    alt = alt + line + ' '
+
+                                a = FILE_TYPES[type_].format(name, alt, c)
+
+
 
                     if subtype in SUB_TYPES:
                         a = SUB_TYPES[subtype]

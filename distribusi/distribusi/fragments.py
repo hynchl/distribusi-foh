@@ -57,7 +57,11 @@ class Fragments:
         meta_path = os.path.join(directory, f)
         with open(meta_path) as json_file:
             meta = json.load(json_file)
-        occupation = meta["occupation"]
+        try:
+            occupation = meta["occupation"]
+        except KeyError:
+            return
+
         if occupation > -1:
             origin_path = os.path.join(directory, file)
             date = self.creation_date(origin_path)

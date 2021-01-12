@@ -1,5 +1,5 @@
 import os
-
+import re
 
 class Ignore:
     def __init__(self):
@@ -19,5 +19,10 @@ class Ignore:
     def test(self, target):
         if target in self.ignore:
             return True
-        else:
-            return False
+
+        for ig in self.ignore:
+            reg = re.compile(ig)
+            if bool(re.match(reg, target)):
+                return True
+
+        return False
