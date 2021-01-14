@@ -11,6 +11,8 @@ from PIL import Image, ExifTags
 import markdown
 
 from distribusi.page_template import html_footer, html_head
+from distribusi.page_template_event import html_footer_evnet, html_head_event
+from distribusi.page_template_events import html_footer_events, html_head_event
 from distribusi.mappings import CODE_TYPES, FILE_TYPES, SUB_TYPES
 from distribusi import fragments
 import uuid
@@ -235,9 +237,6 @@ def render_dir(args, directory):
 
 
 def distribusify(args, directory, freg):  # noqa
-
-
-
     for root, dirs, files in os.walk(directory):
         ignore.add(root)
 

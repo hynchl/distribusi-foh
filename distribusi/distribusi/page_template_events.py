@@ -4,7 +4,7 @@
 # Each folders should be diplayed as `div` with className 'row_event'
 # Please refer `event/events_sample.html`
 
-html_head = """
+html_head_events = """
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -50,7 +50,7 @@ html_head = """
     <div id="about_wrapper">
 """
 
-html_footer = """
+html_footer_events = """
     </div>
   </div>
 
