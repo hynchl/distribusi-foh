@@ -26,3 +26,16 @@ class Ignore:
                 return True
 
         return False
+
+    def testRoot(self, target):
+        path = target.split('/')
+
+        if path[len(path)-1] in self.ignore or path[len(path)-1] == "":
+            return True
+
+        for ig in self.ignore:
+            reg = re.compile(ig)
+            if bool(re.match(reg, target)):
+                return True
+
+        return False

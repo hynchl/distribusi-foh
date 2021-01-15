@@ -11,8 +11,7 @@ from PIL import Image, ExifTags
 import markdown
 
 from distribusi.page_template import html_footer, html_head
-from distribusi.page_template_event import html_footer_evnet, html_head_event
-from distribusi.page_template_events import html_footer_events, html_head_event
+from distribusi.page_template_event import html_footer_event, html_head_event
 from distribusi.mappings import CODE_TYPES, FILE_TYPES, SUB_TYPES
 from distribusi import fragments
 import uuid
@@ -132,13 +131,14 @@ def check_distribusi_index(args, index):
     elif args.force:
         return True
 
-def write_index(args,index, html, html_head, html_footer):
+
+def write_index(args, index, html, html_head, html_footer):
     with open(index, 'w') as f:
         if not args.no_template:
             if args.style:
                 fs = open(args.style, "r")
                 style = fs.read()
-                styled_html_head = html_head# % style
+                styled_html_head = html_head # % style
             else:
                 styled_html_head = html_head % ''
                 print("---")
@@ -162,7 +162,7 @@ def render_dir(args, directory):
             relative_path = "./{}/{}".format(relative, name)
 
             if ignore.test(name):
-                pass
+                continue
             elif 'index.html' not in name:
                 full_path = os.path.join(root, name)
                 mime = MIME_TYPE.from_file(full_path)
@@ -239,6 +239,8 @@ def render_dir(args, directory):
 def distribusify(args, directory, freg):  # noqa
     for root, dirs, files in os.walk(directory):
         ignore.add(root)
+        if ignore.testRoot(root):
+            continue
 
         if args.exclude_directory:
             if args.verbose:
@@ -256,9 +258,13 @@ def distribusify(args, directory, freg):  # noqa
         # fragments index
         # 작가 폴더 내인 경우 아티스트명 저장
         #
+        artist = None
         path = root.split('/')
-        if len(path) == 3:
+        if len(path) > 2:
             artist = path[2].strip()
+
+        print(path)
+        print(artist)
 
         if not args.remove_index:
             html = []
@@ -268,7 +274,7 @@ def distribusify(args, directory, freg):  # noqa
 
             for name in sorted(files):
                 if ignore.test(name):
-                    pass
+                    continue
                 elif 'index.html' not in name:
                     full_path = os.path.join(root, name)
                     mime = MIME_TYPE.from_file(full_path)
@@ -322,8 +328,6 @@ def distribusify(args, directory, freg):  # noqa
 
                                 a = FILE_TYPES[type_].format(name, alt, c)
 
-
-
                     if subtype in SUB_TYPES:
                         a = SUB_TYPES[subtype]
 
@@ -340,7 +344,6 @@ def distribusify(args, directory, freg):  # noqa
                         fid = freg.get_index(artist, name)
                         html.append(div(args, type_, subtype, a, name, fid))
 
-
             if root != directory:
                 if args.menu_with_index:
                     html.append('<a href="../index.html">../</a>')
@@ -349,9 +352,8 @@ def distribusify(args, directory, freg):  # noqa
 
             for name in dirs:
                 if ignore.test(name):
-                    pass
-                elif len(path) == 3 and artist:
-                    print(artist)
+                    continue
+                elif (len(path) == 3 and artist) or (len(path) == 4 and artist == "events"):
                     # dirs 내부의 콘텐츠를 렌더링해 가져와야 함
                     fid = freg.get_index(artist, name)
                     rd = render_dir(args, "{}/{}".format(root, name))
@@ -363,9 +365,15 @@ def distribusify(args, directory, freg):  # noqa
                 index = os.path.join(root, 'index.html')
                 if os.path.exists(index):
                     if check_distribusi_index(args, index):
-                       write_index(args,index,html, html_head, html_footer)
+                        if artist == "events":
+                            write_index(args, index, html, html_head_event, html_footer_event)
+                        else:
+                            write_index(args, index, html, html_head, html_footer)
                 elif not os.path.exists(index):
-                    write_index(args,index,html, html_head, html_footer)
+                    if artist == "events":
+                        write_index(args, index, html, html_head_event, html_footer_event)
+                    else:
+                        write_index(args, index, html, html_head, html_footer)
 
         if args.remove_index:
             index = os.path.join(root, 'index.html')
