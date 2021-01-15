@@ -29,8 +29,21 @@ class Ignore:
 
     def testRoot(self, target):
         path = target.split('/')
+        path_len = len(path)
+        if path_len > 2:
+            artist = path[2].strip()
 
-        if path[len(path)-1] in self.ignore or path[len(path)-1] == "":
+        # 이벤트 폴더가 아닌 폴더는 3depth 이상은 무시
+        if path_len > 3:
+            if artist == "events":
+                pass
+            else:
+                return True
+
+        if path_len > 4:
+            return True
+
+        if path[path_len-1] in self.ignore or path[path_len-1] == "":
             return True
 
         for ig in self.ignore:
