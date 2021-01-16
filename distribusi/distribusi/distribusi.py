@@ -92,7 +92,7 @@ def div(args, type_, subtype, tag, name, fid):
     else:
         filename = '<span class="filename">{}</span>'.format(name)
 
-    if len(str(fid)) >= 36 or fid<0: # detect if fid is uuid
+    if len(str(fid)) >= 36 or int(fid) < 0: # detect if fid is uuid
         if 'image' in type_:
             html = '<div class="{}">{}</div>'
         elif 'pdf' in subtype:
