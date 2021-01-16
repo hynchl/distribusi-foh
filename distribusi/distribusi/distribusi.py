@@ -162,7 +162,7 @@ def render_dir(args, directory):
             relative_path = "./{}/{}".format(relative, name)
 
             if ignore.test(name):
-                continue
+                pass
             elif 'index.html' not in name:
                 full_path = os.path.join(root, name)
                 mime = MIME_TYPE.from_file(full_path)
@@ -274,7 +274,7 @@ def distribusify(args, directory, freg):  # noqa
 
             for name in sorted(files):
                 if ignore.test(name):
-                    continue
+                    print("Ignore : " + name)
                 elif 'index.html' not in name:
                     full_path = os.path.join(root, name)
                     mime = MIME_TYPE.from_file(full_path)
@@ -340,7 +340,7 @@ def distribusify(args, directory, freg):  # noqa
                             subtype = subtype + ' unkown-file'
 
                     a = a.replace('{}', name)
-                    if len(path) == 3 and artist:
+                    if (len(path) == 3 and artist) or (len(path) == 4 and artist == "events"):
                         fid = freg.get_index(artist, name)
                         html.append(div(args, type_, subtype, a, name, fid))
 
@@ -352,7 +352,7 @@ def distribusify(args, directory, freg):  # noqa
 
             for name in dirs:
                 if ignore.test(name):
-                    continue
+                    pass
                 elif (len(path) == 3 and artist) or (len(path) == 4 and artist == "events"):
                     # dirs 내부의 콘텐츠를 렌더링해 가져와야 함
                     fid = freg.get_index(artist, name)

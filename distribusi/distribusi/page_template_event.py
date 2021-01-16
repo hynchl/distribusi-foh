@@ -7,6 +7,9 @@ html_head_event = """
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
+    <!-- EVENTS TEMPLATE -->
+    
     <title>환대의 조각들 Fragments of Hospitality</title>
     <!-- Generated with distribusi https://git.vvvvvvaria.org/varia/distribusi -->
     <meta name="generator" content="distribusi" />
@@ -17,13 +20,9 @@ html_head_event = """
     <link rel="stylesheet" type="text/css" href="/src/style/event.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="/src/scripts/mobileScroll.js"></script>
-  
   </head>
   <body>
 <div>
-
-
-
   <div id="menu">
     <div id="logo_wrapper" class="svg_wrapper">
       <a href="/">
