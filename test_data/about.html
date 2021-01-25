@@ -38,7 +38,53 @@
     <!-- to avoid overlapping -->
   </div>
 
-  <div id="contents">
+  <div id="contents" class="en">
+    <div id="about_wrapper">
+      <p class="col">
+        We are collecting some fragments. The mutually dependent differences exist like the snow crystals that drift without any past, future, or memory, while refusing to become identical, and revealing each one of them as they glitter. We try to imagine the art of the future based on these fragments.
+        <a id="wrapper_coc" href="http://never.gonetis.com:9002/p/0000fregments_of_hospitality" target="_blank">
+            <img id="icon_coc" src="src/img/icon_coc.svg" alt="꽃모양 선언문 버튼">
+            go to code of conduct
+          </a>
+      </p>
+      <p class="col">
+        <b>Co-creators</b></br>
+        109, blblblg, MC.mama, Eunjeong Gu, Grace-Kim, Hyunchul Kim, Dah Yee Noh, Nodl, *diana lab, Dolgoreh, mooming, Insook Bae, Korean_Peoples_Solidarity_Against_Poverty, Song Soo, Min Shin, Jae Shin, Sewon An, Seungwook Yang, Oro Minkyung, Wonjung, yuhee, doohoyi, yiyagi, Ichimura Misako, Jinho Jeong, Ueta Jiro, Hamamu, Megumi, Hong Seo Yeon</br>
+        </br>
+	*dianalab is a group that studies and carries out the expression to share and join in with the social minorities. It is a collective of diverse people, who do media art, sound art, textile, photography, film, etc. for their individual work, and have been working on the delicate work of creating an entirety of work from physical space to moments and invisible air.
+        </br></br>
+
+
+	Design: Dah Yee Noh</br>
+	Video & Streaming: Jiro Ueta, 이야기</br>
+	Web: Hyunchul Kim, Sewon An, doohoyi, Wonjung</br>
+	Promotion: Eunhye</br>
+	translation: Soonyoung Choi</br>
+
+      </p>
+      <p class="col">
+        <b>Story Behind the Design of Fragments of Hospitality</b></br>
+        In an academic paper on “snow crystals”, Dr. Ukichiro Nakaya presents years of his observation pertaining to how and in what forms the snow crystals are formed. Contrary to the common understanding that they only take a couple of forms, snow crystals actually assume numerous forms depending on climate, temperature, and region. The fact that white snow crystals that come to us on a dark winter night as if they are giving us hospitality, in fact, reveal such diverse types and shapes, seems to fit right into our “fragments of hospitality” project. Like Dr. Nakaya,  inspired by the work done by various artists and participants, we draw forms that have become abstract. Eventually, those fragments would diversify to have emotions, glitter like the snow crystals, or become mixed together and turn into water.
+       </br></br>
+       <b>Methods of connection</b></br>
+       Individuals collecting fragments each have their own folder. When they put a story, picture, audio, or video file inside a folder, each fragment is assigned a serial number, and gets accumulated in the fragments of hospitality website.The fragments connect us. 
+  We hope that we can choose the “nature and attitude” of the medium that mediates our connection.
+        <img onclick="showEnglish()" src="src/img/language_kor.svg" style="width:20px; vertical-align:text-top">
+	</br></br>
+       *We borrowed the method of exchange and sharing from distribusi, a project that proposes the form of publication that documents and updates communal project. 
+        <a href="https://test.roelof.info/nooo2-three-takes-on-taking-care.html" target="_blank">디스트리붓시</a>
+      </p>
+
+      <div id="wrapper_sns">
+        <a href="https://instagram.com/fragments_1444/" target="_blank">
+        <img id="icon_ig" src="src/img/instagram.svg" alt="인스타그램 버튼 instagram button"></a>
+        <a href="https://www.facebook.com/fragments1444/" target="_blank">
+        <img id="icon_fb" src="src/img/facebook.svg" alt="페이스북 버튼 facebook button"></a>
+      </div>
+    </div>
+  </div>
+
+  <div id="contents" class="ko">
     <div id="about_wrapper">
       <p class="col">
         우리는 어떤 조각들을 모으고 있습니다. 과거도 미래도 기억도 없이, 흩날리는 눈 하나하나의 결정처럼, 서로 같아지려 하지 않고, 반짝이는 스스로를 드러내며, 상호의존하는 차이들. 이 조각들에 기반하여 미래의 예술을 상상하려고 합니다.
@@ -73,6 +119,8 @@
        <b>연결의 방향</b></br>
        환대의 조각들을 모으고 있는 개인은 자기만의 폴더를 가지고 있다. 각자의 이야기, 그림, 소리, 영상 파일을 하나씩 폴더에 넣으면, 각각의 조각은 일련의 번호를 부여받고, 환대의 조각들 페이지에 차곡히 쌓인다. 조각들이 우리를 연결한다.
        우리의 연결을 매개하는 매체의 ‘성질과 태도'를 우리가 선택할 수 있으면 좋겠다.
+       <img onclick="showKorean()" src="src/img/language_en.svg" style="width:20px; vertical-align:text-top">
+
 	</br></br>
        *공동 프로젝트를 문서화하고 업데이트하는 새로운 방식의 출판을 제안하는 프로젝트, 디스트리붓시의 공유 방식을 빌려왔다.
         <a href="https://test.roelof.info/nooo2-three-takes-on-taking-care.html" target="_blank">디스트리붓시</a>
@@ -86,6 +134,69 @@
     </div>
   </div>
 
+  <script>
+    // reference https://blog.naver.com/jaelong191/221509952654
+    console.log("cookie~!")
+    
+    function setCookie(cookie_name, value, days) {
+      let exdate = new Date();
+      exdate.setDate(exdate.getDate() +  days);
+
+      var cookie_value = escape(value) + ((days == null)? '':'; expires=' + exdate.toUTCString());
+      document.cookie = cookie_name + '=' + cookie_value;
+      // 설정 일수만큼 
+      console.log("done")
+      console.log(document.cookie)
+    }
+
+    function deleteCookie (cookie_name) {
+      let expireDate = new Date();
+      expireDate.setDate(expireDate.getDate() - 1);
+      document.cookie = cookie_name + "= " + "; expires=" + expireDate.toGMTString();
+    }
+
+    function getCookie(cookie_name) {
+      let x, y;
+      let val = document.cookie.split(';');
+
+      for (let i = 0; i < val.length; i++) {
+        x = val[i].substring(0, val[i].indexOf('='));
+        y = val[i].substr(val[i].indexOf('=') + 1);
+        x = x.replace(/^\s+|\s+$/g, '');
+        if (x == cookie_name) {
+          return unescape(y);
+        }
+      }
+    }
+
+    // setCookie('lang', 'en', 30);
+    console.log(getCookie('lang'));
+
+    console.log(getCookie('hyunchul'));
+
+
+    if (getCookie('lang') ==='en') {
+      // Hide korean contents
+      showEnglish();
+    } else {
+      // Hide english contents
+      showKorean();
+    }
+
+    function showKorean(){
+      document.querySelector(".ko").style.display = 'none';
+      document.querySelector(".en").style.display = '';
+      deleteCookie('lang');
+
+    }
+
+    function showEnglish(){
+      document.querySelector(".en").style.display = 'none';
+      document.querySelector(".ko").style.display = '';
+      setCookie('lang', 'en', 100); // save cookie for 
+    }
+  
+  </script>
 
 </div>
 </body>
