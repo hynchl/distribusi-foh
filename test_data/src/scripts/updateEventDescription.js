@@ -10,8 +10,10 @@ ed_resquest.send();
 
 var ed = null;
 ed_resquest.onload = function() {
-  ed = ed_resquest.response[event_number];
+  // console.log(ed_resquest.response)
+  res = ed_resquest.response;
+  ed = res[event_number];
   document.getElementById("event_date").innerHTML = ed.date;
-  document.getElementById("event_title").innerHTML = `#${ed.number} ${ed.title}`
+  document.getElementById("event_title").innerHTML = `#${event_number} ${ed.title}`
   document.getElementById("event_details").innerHTML = ed.details;
 }

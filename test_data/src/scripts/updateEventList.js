@@ -15,10 +15,16 @@ ed_resquest.onload = function() {
   console.log(event_list)
   for (let key in event_list){
     console.log(key);
+
+    // convert date format( `.` -> `/` )
     let event = event_list[key];
+    let date = event.date.split('.');
+    date.pop();
+    let date_str = date.join(' /');
+    
     let row = document.createElement('div');
     row.classList.add("event_row")
-    row.innerHTML = `${event.date} #${event.number} ${event.title} : ${event.host}`
+    row.innerHTML = `${date_str} &emsp;&emsp; #${key} ${event.title} : ${event.host}`
     let link = document.createElement('a');
     link.href = `${key}/`
     link.appendChild(row)
