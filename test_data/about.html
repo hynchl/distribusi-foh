@@ -144,9 +144,6 @@
 
       var cookie_value = escape(value) + ((days == null)? '':'; expires=' + exdate.toUTCString());
       document.cookie = cookie_name + '=' + cookie_value;
-      // 설정 일수만큼 
-      console.log("done")
-      console.log(document.cookie)
     }
 
     function deleteCookie (cookie_name) {
@@ -169,17 +166,9 @@
       }
     }
 
-    // setCookie('lang', 'en', 30);
-    console.log(getCookie('lang'));
-
-    console.log(getCookie('hyunchul'));
-
-
     if (getCookie('lang') ==='en') {
-      // Hide korean contents
       showEnglish();
     } else {
-      // Hide english contents
       showKorean();
     }
 
@@ -193,7 +182,7 @@
     function showEnglish(){
       document.querySelector(".en").style.display = 'none';
       document.querySelector(".ko").style.display = '';
-      setCookie('lang', 'en', 100); // save cookie for 
+      setCookie('lang', 'en', 100);
     }
   
   </script>
