@@ -69,7 +69,7 @@ let findElementByProperty = (arr, key, value) => {
       
       let lang_button = document.createElement("img");
       lang_button.setAttribute("src", `/src/img/language_en.svg`)
-      lang_button.setAttribute("style", "width:20px; vertical-align:text-top")
+      lang_button.setAttribute("style", "width:20px; vertical-align:text-top; cursor:pointer;")
       lang_button.onclick = showEnglish
       document.getElementById("introduction").appendChild(lang_button)
 
@@ -105,7 +105,7 @@ let findElementByProperty = (arr, key, value) => {
       
       let lang_button = document.createElement("img");
       lang_button.setAttribute("src", `/src/img/language_kor.svg`)
-      lang_button.setAttribute("style", "width:20px; vertical-align:text-top")
+      lang_button.setAttribute("style", "width:20px; vertical-align:text-top; cursor:pointer;")
       lang_button.onclick = showKorean
       document.getElementById("introduction").appendChild(lang_button)
       
