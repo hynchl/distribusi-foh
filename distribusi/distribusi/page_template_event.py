@@ -41,7 +41,7 @@ html_head_event = """
       </a>
       </span>
     <span id="to_timeline">
-      <a href="#">
+      <a href="/events/">
         TIMELINE
       </a>
       </span>

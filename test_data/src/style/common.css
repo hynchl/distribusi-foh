@@ -94,7 +94,7 @@
         }
 
         div#menu>span#to_about{margin-left: 20px;}
-        div#menu>span#to_timeline{display: none;} /*temp*/
+        /* div#menu>span#to_timeline{display: none;}  */
 
         div#logo_wrapper {
           position:absolute;
