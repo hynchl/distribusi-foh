@@ -31,7 +31,7 @@ html_head_event = """
     </div>
 
     <div id="timeline_icon_wrapper" class="svg_wrapper">
-      <a href="/events/">
+      <a href="/events/list.html">
       <img id="about_icon"src="/src/img/events_events-back.svg" alt="구름 모양 타임라인 버튼">
       </a>
     </div>
@@ -47,7 +47,7 @@ html_head_event = """
       </a>
       </span>
     <span id="to_timeline">
-      <a href="/events/">
+      <a href="/events/list.html">
         TIMELINE
       </a>
       </span>
