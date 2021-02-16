@@ -111,7 +111,6 @@
         img#about_icon { width:80px; }
 
         div#timeline_icon_wrapper {
-          display: none;
           position:fixed;
           right: 30px;
           bottom: 30px;

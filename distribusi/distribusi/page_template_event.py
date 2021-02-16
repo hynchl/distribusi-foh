@@ -30,6 +30,12 @@ html_head_event = """
     </a>
     </div>
 
+    <div id="timeline_icon_wrapper" class="svg_wrapper">
+      <a href="/events/">
+      <img id="about_icon"src="/src/img/events_events-back.svg" alt="구름 모양 타임라인 버튼">
+      </a>
+    </div>
+
     <span id="to_about">
       <a href="/about.html">
         ABOUT
