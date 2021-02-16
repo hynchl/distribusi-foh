@@ -2,12 +2,12 @@ div#event_description {
     margin:10px;
   }
 
-  div#event_date {
+  div#event_title {
     padding-bottom: 2px;
     border-bottom: 1px solid black;
   }
 
-  div#event_title {
+  div#event_date, div#event_host, div#event_place {
     padding-top: 6px;
     padding-bottom: 2px;
     border-bottom: 1px solid black;

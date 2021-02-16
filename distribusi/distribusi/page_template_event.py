@@ -61,10 +61,16 @@ html_head_event = """
     <div id="fragment_wrapper">
     </div>
     <div id="event_description">
+      <div id="event_title">
+        <!-- this part will be load dynamically -->
+      </div>
       <div id="event_date">
         <!-- this part will be load dynamically -->
       </div>
-      <div id="event_title">
+      <div id="event_place">
+        <!-- this part will be load dynamically -->
+      </div>
+      <div id="event_host">
         <!-- this part will be load dynamically -->
       </div>
       <div id="event_details">
