@@ -1,12 +1,12 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 html_head = """
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <title>환대의 조각들 Fragments of Hospitality</title>
     <!-- Generated with distribusi https://git.vvvvvvaria.org/varia/distribusi -->
     <meta name="generator" content="distribusi" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     %s
     <link rel="stylesheet" type="text/css" href="/src/style/common.css" />

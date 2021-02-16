@@ -1,19 +1,19 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 # This template is used for generating each event pages
 # Please refer `event/0000/events_sample.html`
 
 html_head_event = """
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    
+
     <!-- EVENTS TEMPLATE -->
-    
+
     <title>환대의 조각들 Fragments of Hospitality</title>
     <!-- Generated with distribusi https://git.vvvvvvaria.org/varia/distribusi -->
     <meta name="generator" content="distribusi" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     %s
     <link rel="stylesheet" type="text/css" href="/src/style/common.css" />

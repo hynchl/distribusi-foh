@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 # This template is used for generating the list of event
 # Each folders should be diplayed as `div` with className 'row_event'
@@ -6,7 +6,7 @@
 
 html_head_events = """
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <title>환대의 조각들 Fragments of Hospitality</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
