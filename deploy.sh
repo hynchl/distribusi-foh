@@ -24,6 +24,9 @@ cp test_data/participants.html data/
 rm data/index.html
 cp test_data/index.html data/
 
+rm data/events/list.html
+cp test_data/events/list.html data/events/
+
 python distribusi/test.py -t -d ./data/
 
 #monitoring each command invokations (off)
