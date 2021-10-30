@@ -24,7 +24,7 @@ ed_resquest.onload = function() {
     
     let row = document.createElement('div');
     row.classList.add("event_row")
-    row.innerHTML = `${date_str} &emsp;&emsp; #${key} ${event.title} : ${event.host}`
+    row.innerHTML = `${date_str} &emsp;&emsp; #${key} ${event.title}`
     let link = document.createElement('a');
     link.href = `${key}/`
     link.appendChild(row)
