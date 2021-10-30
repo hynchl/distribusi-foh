@@ -16,7 +16,7 @@ ed_resquest.onload = function() {
   document.getElementById("event_date").innerHTML = ed.date;
   document.getElementById("event_title").innerHTML = `#${event_number} ${ed.title}`
   document.getElementById("event_details").innerHTML = ed.details;
-  document.getElementById("event_place").innerHTML = ed.place;
-  document.getElementById("event_host").innerHTML = ed.host;
+  // document.getElementById("event_place").innerHTML = ed.place;
+  // document.getElementById("event_host").innerHTML = ed.host;
   
 }
