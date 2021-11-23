@@ -13,31 +13,11 @@ ed_resquest.onload = function() {
   event_list = ed_resquest.response;
 
   console.log(event_list)
-  // for (let key in event_list){
-  //   console.log(key);
-
-  //   // convert date format( `.` -> `/` )
-  //   let event = event_list[key];
-  //   let date = event.date.split('.');
-  //   date.pop();
-  //   let date_str = date.join(' /');
-
-  //   let row = document.createElement('div');
-  //   row.classList.add("event_row")
-  //   row.innerHTML = `${date_str} &emsp;&emsp; #${key} ${event.title}`
-  //   let link = document.createElement('a');
-  //   link.href = `${key}/`
-  //   link.appendChild(row)
-
-  //   document.getElementById("about_wrapper").appendChild(link);
-  //   // TODO: add hover effect
-  //   // TODO: add
-  // }
 
   Object.entries(event_list)
 
     .sort(function(a, b) {
-      return a[1].number > b[1].number
+      return a[1].number < b[1].number
     })
 
     .forEach(function(item) {
