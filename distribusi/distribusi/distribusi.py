@@ -17,6 +17,8 @@ from distribusi import fragments
 import uuid
 from distribusi.ignore import Ignore
 
+import traceback
+
 MIME_TYPE = magic.Magic(mime=True)
 
 ignore = Ignore()
@@ -79,6 +81,7 @@ def thumbnail(image, name, args):
             "<figure><a href='{}'><img class='thumbnail' src='data:image/jpg;base64,{}'></a><figcaption>{}</figcaption></figure>"
         ).format(name, data_url, cap)
     except Exception as e:
+        traceback.print_exc()
         print('Thumbnailer:', e)
         return "<figure><a href='{}'><img src='{}'></a><figcaption>{}</figcaption></figure>".format(name, name, name)
 
