@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 import base64
 import os
@@ -43,9 +43,10 @@ def caption(image):
 
 
 def thumbnail(image, name, args, size=(450,450)):
-    
+
     try:
         # size = (450, 450)
+        alt = ''
         im = Image.open(image)
         exif = None
         try:
@@ -65,12 +66,12 @@ def thumbnail(image, name, args, size=(450,450)):
                 im = im.rotate(270, expand=True)
             elif exif[orientation] == 8:
                 im = im.rotate(90, expand=True)
-        
+
         if (im.mode == 'RGBA'):
             bg = Image.new('RGBA', im.size, (255,255,255))
             composite = Image.alpha_composite(bg, im)
             im=composite.convert('RGB')
-        
+
         output = BytesIO()
         im.save(output, format='JPEG')
         im_data = output.getvalue()
@@ -79,13 +80,21 @@ def thumbnail(image, name, args, size=(450,450)):
             cap = caption(image)
         else:
             cap = name
+        # alt
+        alt_path = image + ".alt"
+        if os.path.isfile(alt_path):
+            f = open(alt_path, 'r', encoding='utf-8')
+            while True:
+                line = f.readline()
+                if not line: break
+                alt = alt + line + ' '
         return (
-            "<figure><a href='{}'><img class='thumbnail' src='data:image/jpg;base64,{}'></a><figcaption>{}</figcaption></figure>"
-        ).format(name, data_url, cap)
+            "<figure><a href='{}'><img class='thumbnail' src='data:image/jpg;base64,{}' alt='{}'></a><figcaption>{}</figcaption></figure>"
+        ).format(name, data_url, alt, cap)
     except Exception as e:
         traceback.print_exc()
         print('Thumbnailer:', e)
-        return "<figure><a href='{}'><img src='{}'></a><figcaption>{}</figcaption></figure>".format(name, name, name)
+        return "<figure><a href='{}'><img src='{}' alt='{}'></a><figcaption>{}</figcaption></figure>".format(name, name, alt, name)
 
 
 def div(args, type_, subtype, tag, name, fid):
@@ -202,15 +211,6 @@ def render_dir(args, directory):
 
                     if type_ == 'image':
                         a = FILE_TYPES[type_].format(relative_path, c, c)
-                        if args.thumbnail:
-                            thumbconf_path = "./{}/{}".format(root, "thumbconf.json")
-                            size = (450, 450)
-                            if os.path.isfile(thumbconf_path):
-                                with open(thumbconf_path) as json_file:
-                                    json_data = json.load(json_file)
-                                    size = tuple(json_data['size'])
-                                    print("applying thumbconf.json: size: ", size)
-                            a = thumbnail(full_path, relative_path, args, size)
                         if args.no_filenames:
                             c = ""
                         if args.captions:
@@ -227,6 +227,16 @@ def render_dir(args, directory):
                                 alt = alt + line + ' '
 
                             a = FILE_TYPES[type_].format(relative_path, alt, c)
+                        # if thumbnail, override.
+                        if args.thumbnail:
+                            thumbconf_path = "./{}/{}".format(root, "thumbconf.json")
+                            size = (450, 450)
+                            if os.path.isfile(thumbconf_path):
+                                with open(thumbconf_path) as json_file:
+                                    json_data = json.load(json_file)
+                                    size = tuple(json_data['size'])
+                                    print("applying thumbconf.json: size: ", size)
+                            a = thumbnail(full_path, relative_path, args, size)
 
                 if subtype in SUB_TYPES:
                     a = SUB_TYPES[subtype]
@@ -299,7 +309,7 @@ def distribusify(args, directory, freg):  # noqa
                         print('Found', name, 'as', mime)
 
                     if type_ in FILE_TYPES:
-                        
+
                         a = FILE_TYPES[type_].format(name, c, c)
 
                         # expansion for different kind of text files
@@ -339,6 +349,16 @@ def distribusify(args, directory, freg):  # noqa
                                     alt = alt + line + ' '
 
                                 a = FILE_TYPES[type_].format(name, alt, c)
+                            # # if thumbnail, override.
+                            # if args.thumbnail:
+                            #     thumbconf_path = "./{}/{}".format(root, "thumbconf.json")
+                            #     size = (450, 450)
+                            #     if os.path.isfile(thumbconf_path):
+                            #         with open(thumbconf_path) as json_file:
+                            #             json_data = json.load(json_file)
+                            #             size = tuple(json_data['size'])
+                            #             print("applying thumbconf.json: size: ", size)
+                            #     a = thumbnail(full_path, relative_path, args, size)
 
                     if subtype in SUB_TYPES:
                         a = SUB_TYPES[subtype]
