@@ -17,7 +17,7 @@ ed_resquest.onload = function() {
   Object.entries(event_list)
 
     .sort(function(a, b) {
-      return a[1].number < b[1].number
+      return b[1].number - a[1].number
     })
 
     .forEach(function(item) {
