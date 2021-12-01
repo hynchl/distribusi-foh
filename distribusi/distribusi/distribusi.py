@@ -17,6 +17,9 @@ from distribusi import fragments
 import uuid
 from distribusi.ignore import Ignore
 
+import traceback
+import json
+
 MIME_TYPE = magic.Magic(mime=True)
 
 ignore = Ignore()
@@ -39,9 +42,10 @@ def caption(image):
     return caption
 
 
-def thumbnail(image, name, args):
+def thumbnail(image, name, args, size=(450,450)):
+    
     try:
-        size = (450, 450)
+        # size = (450, 450)
         im = Image.open(image)
         exif = None
         try:
@@ -79,6 +83,7 @@ def thumbnail(image, name, args):
             "<figure><a href='{}'><img class='thumbnail' src='data:image/jpg;base64,{}'></a><figcaption>{}</figcaption></figure>"
         ).format(name, data_url, cap)
     except Exception as e:
+        traceback.print_exc()
         print('Thumbnailer:', e)
         return "<figure><a href='{}'><img src='{}'></a><figcaption>{}</figcaption></figure>".format(name, name, name)
 
@@ -198,7 +203,14 @@ def render_dir(args, directory):
                     if type_ == 'image':
                         a = FILE_TYPES[type_].format(relative_path, c, c)
                         if args.thumbnail:
-                            a = thumbnail(full_path, relative_path, args)
+                            thumbconf_path = "./{}/{}".format(root, "thumbconf.json")
+                            size = (450, 450)
+                            if os.path.isfile(thumbconf_path):
+                                with open(thumbconf_path) as json_file:
+                                    json_data = json.load(json_file)
+                                    size = tuple(json_data['size'])
+                                    print("applying thumbconf.json: size: ", size)
+                            a = thumbnail(full_path, relative_path, args, size)
                         if args.no_filenames:
                             c = ""
                         if args.captions:

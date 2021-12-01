@@ -18,8 +18,10 @@ html_head_event = """
     %s
     <link rel="stylesheet" type="text/css" href="/src/style/common.css" />
     <link rel="stylesheet" type="text/css" href="/src/style/event.css" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="/src/scripts/mobileScroll.js"></script>
+    <script src="./main.js"></script>
   </head>
   <body>
 <div>
